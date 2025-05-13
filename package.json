@@ -1,0 +1,50 @@
+{
+  "name": "allfeat",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Allfeat labs. <hello@allfeat.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allfeat/allfeat-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "turbo run build",
+    "build:clean": "turbo run clean:build",
+    "lint-format": "turbo run --parallel lint format ",
+    "lint-format:fix": "turbo run --parallel lint:fix format:fix",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "checktypes": "turbo run --parallel checktypes",
+    "test": "turbo run --parallel test",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "@dedot/chaintypes": "^0.95.0",
+    "@eslint/js": "^9.26.0",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/jest": "^29.5.14",
+    "eslint": "^9.26.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "lint-staged": "^16.0.0",
+    "prettier": "3.5.3",
+    "ts-jest": "^29.3.2",
+    "ts-node": "^10.9.2",
+    "turbo": "^2.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.0"
+  },
+  "dependencies": {
+    "dedot": "^0.9.6"
+  }
+}

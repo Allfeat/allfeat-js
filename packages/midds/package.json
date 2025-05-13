@@ -1,0 +1,16 @@
+{
+  "name": "@allfeat/midds",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Allfeat labs. <hello@allfeat.com>",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "@allfeat/chaintypes": "workspace:../chaintypes"
+  }
+}
