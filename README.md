@@ -2,7 +2,7 @@
 
 > JavaScript/TypeScript SDK for interacting with the Allfeat blockchain.
 
-This monorepo provides essential tooling to interface with the Allfeat Layer 1 blockchain, which is designed to power decentralized music industry applications.
+This monorepo provides essential tooling to interface with the Allfeat networks ecosystem.
 
 ## 📦 Packages
 

@@ -27,9 +27,7 @@
     "test": {
       "dependsOn": ["build"]
     },
-    "checktypes": {
-      "outputs": ["tsconfig.tsbuildinfo"]
-    }
+    "checktypes": {}
   },
   "globalDependencies": [
     ".eslintrc.js",
