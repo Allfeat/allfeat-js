@@ -1,9 +1,13 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "module": "ESNext",
     /* Basic Options */
     "incremental": true,
-    "allowJs": true,
+    "allowJs": false,
+    "checkJs": false,
     "noEmit": true,
     /* Strict Type-Checking Options */
     "noImplicitAny": true,
@@ -13,6 +17,8 @@
     "strictPropertyInitialization": false,
     "noImplicitThis": true,
     "alwaysStrict": true,
+    "moduleResolution": "Node",
+    "moduleDetection": "force",
     "resolveJsonModule": true,
     /* Experimental Options */
     "experimentalDecorators": true,

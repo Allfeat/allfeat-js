@@ -1,4 +1,4 @@
-import { AllfeatProvider } from '../src'
+import { AllfeatProvider } from '../src/provider'
 import { WsProvider } from 'dedot'
 
 /** Dedot WsProvider mocking to not run any real WS connection */
