@@ -13,7 +13,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "copy": "cp -R ./src/* ./dist && rm ./dist/index.ts",
-    "checktypes": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "license": "MIT",

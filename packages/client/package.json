@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "description": "Allfeat optimized RPC Client interface to connect and interact with a node.",
-  "main": "src/index.ts",
-  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
@@ -13,13 +13,13 @@
     "lint:fix": "pnpm lint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "checktypes": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "jest"
   },
   "keywords": [],
   "license": "MIT",
   "peerDependencies": {
-    "@allfeat/chaintypes": "workspace:../chaintypes",
+    "@allfeat/chaintypes": "workspace:*",
     "dedot": ">=0.9.6"
   },
   "packageManager": "pnpm@10.10.0",

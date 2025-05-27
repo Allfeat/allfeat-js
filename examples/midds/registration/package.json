@@ -1,7 +1,7 @@
 {
-  "name": "@allfeat/midds",
+  "name": "midds-registration-example",
+  "private": true,
   "version": "0.1.0",
-  "description": "",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,21 +9,18 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "build:clean": "rm -rf ./dist",
+    "start": "node ./dist/index.js",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "pnpm lint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "test": "jest"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "@allfeat/chaintypes": "workspace:*",
-    "@allfeat/client": "workspace:*"
+    "@allfeat/client": "workspace:*",
+    "@allfeat/midds": "workspace:*"
   },
-  "packageManager": "pnpm@10.10.0",
-  "publishConfig": {
-    "access": "public"
-  }
+  "packageManager": "pnpm@10.10.0"
 }

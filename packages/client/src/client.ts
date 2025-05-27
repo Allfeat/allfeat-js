@@ -1,5 +1,5 @@
 import { DedotClient } from 'dedot'
-import { AllfeatProvider } from '.'
+import { AllfeatProvider } from './index.js'
 import { AllfeatMelodieApi } from '@allfeat/chaintypes'
 
 /**

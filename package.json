@@ -15,14 +15,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "turbo run build",
-    "build:clean": "turbo run clean:build",
+    "build:clean": "turbo run build:clean",
     "lint-format": "turbo run --parallel lint format ",
     "lint-format:fix": "turbo run --parallel lint:fix format:fix",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "checktypes": "turbo run --parallel checktypes",
+    "typecheck": "turbo run --parallel typecheck",
     "test": "turbo run --parallel test",
     "prepare": "husky"
   },
@@ -30,6 +30,7 @@
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
     "@dedot/chaintypes": "^0.95.0",
+    "@dedot/shape": "^0.12.0",
     "@eslint/js": "^9.26.0",
     "@tsconfig/strictest": "^2.0.5",
     "@types/jest": "^29.5.14",
@@ -45,6 +46,8 @@
     "typescript-eslint": "^8.32.0"
   },
   "dependencies": {
+    "@polkadot/keyring": "^13.5.1",
+    "@polkadot/util-crypto": "^13.5.1",
     "dedot": "^0.9.6"
   }
 }
