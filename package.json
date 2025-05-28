@@ -24,7 +24,7 @@
     "format:fix": "prettier --write .",
     "typecheck": "turbo run --parallel typecheck",
     "test": "turbo run --parallel test",
-    "prepare": "husky"
+    "prepare": "husky && pnpm build"
   },
   "keywords": [],
   "packageManager": "pnpm@10.10.0",
