@@ -98,8 +98,6 @@ export class Entity implements INativeTypeConverter<EntityVariant> {
   constructor(
     public name: EntityName,
     public entityType: EntityType,
-    public aliases: PersonAliases,
-    public gender: PersonGender,
   ) {}
 
   toNativeType(): EntityVariant {
