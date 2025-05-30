@@ -1,6 +1,6 @@
 {
   "name": "allfeat",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "license": "MIT",
@@ -10,6 +10,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=7.5.1"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +28,7 @@
     "format:fix": "prettier --write .",
     "typecheck": "turbo run --parallel typecheck",
     "test": "turbo run --parallel test",
-    "prepare": "husky && pnpm build"
+    "prepare": "husky"
   },
   "keywords": [],
   "packageManager": "pnpm@10.10.0",

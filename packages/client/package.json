@@ -6,6 +6,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "build:clean": "rm -rf ./dist",
@@ -24,6 +25,7 @@
   },
   "packageManager": "pnpm@10.10.0",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist"
   }
 }
