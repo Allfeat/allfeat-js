@@ -1,0 +1,31 @@
+{
+  "name": "@allfeat/sdk",
+  "version": "0.1.0",
+  "description": "High-level package which re-export others useful SDK packages.",
+  "author": "Allfeat labs. <hello@allfeat.com>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:clean": "rm -rf ./dist",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "@allfeat/chaintypes": "workspace:*",
+    "@allfeat/client": "workspace:*",
+    "@allfeat/midds": "workspace:*"
+  },
+  "packageManager": "pnpm@10.10.0",
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  }
+}

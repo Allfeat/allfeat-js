@@ -5,7 +5,7 @@ import {
   MiddsPartyIdentifier,
   MiddsPartyIdentifierEntity,
   MiddsPartyIdentifierPerson,
-} from '@allfeat/chaintypes/src/allfeat-melodie'
+} from '@allfeat/chaintypes/allfeat-melodie'
 import { Isni, Ipi } from './rw_id'
 import { EntityName, PersonAliases, PersonFullName } from './types'
 import {

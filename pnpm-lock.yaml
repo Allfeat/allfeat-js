@@ -68,34 +68,50 @@ importers:
     dependencies:
       '@allfeat/client':
         specifier: workspace:*
-        version: link:../../../packages/client
+        version: link:../../../packages/client/dist
       '@allfeat/midds':
         specifier: workspace:*
-        version: link:../../../packages/midds
+        version: link:../../../packages/midds/dist
 
   packages/chaintypes:
     dependencies:
       dedot:
         specifier: '>=0.9.6'
         version: 0.9.6
+    publishDirectory: dist
 
   packages/client:
     dependencies:
       '@allfeat/chaintypes':
         specifier: workspace:*
-        version: link:../chaintypes
+        version: link:../chaintypes/dist
       dedot:
         specifier: '>=0.9.6'
         version: 0.9.6
+    publishDirectory: dist
 
   packages/midds:
     dependencies:
       '@allfeat/chaintypes':
         specifier: workspace:*
-        version: link:../chaintypes
+        version: link:../chaintypes/dist
       '@allfeat/client':
         specifier: workspace:*
-        version: link:../client
+        version: link:../client/dist
+    publishDirectory: dist
+
+  packages/sdk:
+    dependencies:
+      '@allfeat/chaintypes':
+        specifier: workspace:*
+        version: link:../chaintypes/dist
+      '@allfeat/client':
+        specifier: workspace:*
+        version: link:../client/dist
+      '@allfeat/midds':
+        specifier: workspace:*
+        version: link:../midds/dist
+    publishDirectory: dist
 
 packages:
 

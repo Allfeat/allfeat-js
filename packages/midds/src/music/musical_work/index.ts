@@ -1,5 +1,5 @@
 import { IMidds, IMiddsWithClient } from '../../interfaces/index.js'
-import { MiddsMusicalWork } from '@allfeat/chaintypes/src/allfeat-melodie'
+import { MiddsMusicalWork } from '@allfeat/chaintypes/allfeat-melodie'
 import { Iswc } from './rw_id/iswc.js'
 import { MelodieClient } from '@allfeat/client'
 import {
