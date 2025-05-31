@@ -1,4 +1,4 @@
-import { MiddsString } from '../../../types/index.js'
+import { MiddsString } from '../../../types/string'
 
 export class Isni extends MiddsString {
   constructor(value: string) {

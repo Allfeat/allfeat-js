@@ -1,8 +1,13 @@
-# Generated files
-.pnpm-store
-pnpm-lock.yaml
+.DS_Store
 node_modules
-dist
+/build
+/package
+/dist
+.env
+.env.*
+!.env.example
 
-# Packages
-/packages
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+pnpm-workspace.yaml
+package-lock.json

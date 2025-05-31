@@ -1,4 +1,4 @@
-import { Isni } from '../isni.js'
+import { Isni } from '../isni'
 
 describe('Isni', () => {
   it('should create a valid ISNI with proper format', () => {

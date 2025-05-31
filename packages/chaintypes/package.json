@@ -3,25 +3,28 @@
   "version": "0.1.0",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "description": "Types for substrate-based Allfeat chains",
+  "exports": {
+    ".": "./dist/index.js",
+    "./allfeat-melodie": "./dist/allfeat-melodie/index.d.ts"
+  },
   "main": "src/index.ts",
   "sideEffects": false,
   "type": "module",
   "scripts": {
     "gen-types-from-local": "npx dedot chaintypes -w ws://127.0.0.1:9944 -o src/",
-    "build": "tsc -p tsconfig.build.json && pnpm copy",
+    "build": "tsc && pnpm copy",
     "build:clean": "rm -rf ./dist",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
     "copy": "cp -R ./src/* ./dist && rm ./dist/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "license": "MIT",
-  "peerDependencies": {
+  "dependencies": {
+    "@allfeat/typescript-config": "workspace:*",
     "dedot": ">=0.9.6"
   },
   "packageManager": "pnpm@10.10.0",
-  "publishConfig": {
-    "access": "public"
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }

@@ -1,4 +1,4 @@
-import { MiddsUint } from '../../../types/index.js'
+import { MiddsUint } from '../../../types/uint'
 
 export class Ipi extends MiddsUint {
   protected override max(): number | undefined {
