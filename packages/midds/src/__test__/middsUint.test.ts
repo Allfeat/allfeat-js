@@ -1,4 +1,4 @@
-import { MiddsUint } from '../index.js'
+import { MiddsUint } from '../types/uint'
 
 // Classe concrète pour tests
 class TestUint extends MiddsUint {

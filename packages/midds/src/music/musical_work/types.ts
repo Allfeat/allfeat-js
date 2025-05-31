@@ -1,7 +1,8 @@
 import {
   MiddsMusicalWorkMusicalWorkType,
   MiddsMusicalWorkParticipant,
-} from '@allfeat/chaintypes/allfeat-melodie/types.js'
+} from '@allfeat/chaintypes/allfeat-melodie'
+
 import { MiddsId, MiddsString } from '../../types/index.js'
 import { INativeTypeConverter } from '../../interfaces/INativeTypeConverter.js'
 import { MiddsArrayConvertible, MiddsArrayRaw } from '../../types/array.js'

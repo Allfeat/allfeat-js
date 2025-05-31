@@ -1,6 +1,6 @@
 import { ISubmittableExtrinsic } from 'dedot/types'
-import { MiddsWithClient } from '../index.js'
-import type { IMidds, IMiddsWithClient } from '../index.js'
+import { MiddsWithClient } from '../types/midds'
+import type { IMidds, IMiddsWithClient } from '../interfaces'
 import type { MelodieClient } from '@allfeat/client'
 
 class FakeMidds implements IMidds<string, `rw${number}`> {

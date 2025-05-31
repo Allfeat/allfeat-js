@@ -3,17 +3,17 @@
   "version": "0.1.0",
   "description": "High-level package which re-export others useful SDK packages.",
   "author": "Allfeat labs. <hello@allfeat.com>",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
-  "sideEffects": false,
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc",
     "build:clean": "rm -rf ./dist",
-    "lint": "eslint . --ext .js,.ts",
-    "lint:fix": "pnpm lint --fix",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
+    "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -21,11 +21,16 @@
   "dependencies": {
     "@allfeat/chaintypes": "workspace:*",
     "@allfeat/client": "workspace:*",
-    "@allfeat/midds": "workspace:*"
+    "@allfeat/eslint-config": "workspace:*",
+    "@allfeat/midds": "workspace:*",
+    "@allfeat/typescript-config": "workspace:*"
   },
   "packageManager": "pnpm@10.10.0",
   "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "access": "public"
+  },
+  "devDependencies": {
+    "eslint": "^9.27.0",
+    "typescript": "^5.8.3"
   }
 }

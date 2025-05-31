@@ -1,4 +1,4 @@
-import { MiddsArrayConvertible, MiddsArrayRaw } from '../types/array.js'
+import { MiddsArrayConvertible, MiddsArrayRaw } from '../types/array'
 import type { INativeTypeConverter } from '../interfaces/INativeTypeConverter.js'
 
 // Mock convertible type

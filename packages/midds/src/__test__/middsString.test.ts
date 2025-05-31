@@ -1,4 +1,4 @@
-import { MiddsString } from '../index.js'
+import { MiddsString } from '../types/string'
 
 /// Mock class
 class TestString extends MiddsString {
