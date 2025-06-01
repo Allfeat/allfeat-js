@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/chaintypes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "description": "Types for substrate-based Allfeat chains",
   "exports": {
@@ -20,11 +20,11 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "@allfeat/typescript-config": "workspace:*",
     "dedot": ">=0.9.6"
   },
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
+    "@allfeat/typescript-config": "workspace:*",
     "typescript": "^5.8.3"
   }
 }

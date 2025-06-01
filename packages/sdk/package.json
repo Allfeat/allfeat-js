@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "High-level package which re-export others useful SDK packages.",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "type": "module",
@@ -21,15 +21,15 @@
   "dependencies": {
     "@allfeat/chaintypes": "workspace:*",
     "@allfeat/client": "workspace:*",
-    "@allfeat/eslint-config": "workspace:*",
-    "@allfeat/midds": "workspace:*",
-    "@allfeat/typescript-config": "workspace:*"
+    "@allfeat/midds": "workspace:*"
   },
   "packageManager": "pnpm@10.10.0",
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "@allfeat/typescript-config": "workspace:*",
+    "@allfeat/eslint-config": "workspace:*",
     "eslint": "^9.27.0",
     "typescript": "^5.8.3"
   }
