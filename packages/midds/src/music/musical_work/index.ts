@@ -16,6 +16,8 @@ import {
   MusicMode,
 } from '../../index.js'
 
+export * from './types.js'
+
 export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
   constructor(
     public iswc: Iswc,

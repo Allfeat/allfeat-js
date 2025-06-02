@@ -16,6 +16,8 @@ import {
 import { MelodieClient } from '@allfeat/client'
 import { MiddsWithClient } from '../../types/index.js'
 
+export * from './types.js'
+
 export const PersonType = {
   Solo: 'Solo',
   Group: 'Group',
