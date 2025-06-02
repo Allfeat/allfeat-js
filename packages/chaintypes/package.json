@@ -3,6 +3,10 @@
   "version": "0.1.1",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "description": "Types for substrate-based Allfeat chains",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allfeat/allfeat-js.git"
+  },
   "exports": {
     ".": "./dist/index.js",
     "./allfeat-melodie": "./dist/allfeat-melodie/index.d.ts"

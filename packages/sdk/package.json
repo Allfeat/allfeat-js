@@ -10,6 +10,10 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allfeat/allfeat-js.git"
+  },
   "scripts": {
     "build": "tsc",
     "build:clean": "rm -rf ./dist",

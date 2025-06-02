@@ -24,6 +24,13 @@ console.log(`Free balance: ${balance.free.toString()}`)
 
 ---
 
+### [`@allfeat/midds`](./packages/midds)
+
+Core MIDDS (Music Industry Decentralized Data Structure) definitions and utilities.
+This package contains types, validation logic, chain encoding helpers and client interfaces for working with musical metadata on Allfeat.
+
+---
+
 ### [`@allfeat/chaintypes`](./packages/chaintypes)
 
 TypeScript bindings for the Allfeat runtime, auto-generated via `dedot`.
@@ -40,7 +47,7 @@ type BalanceCall = AllfeatMelodieApi['tx']['balances']['transferKeepAlive']
 ## 🚀 Getting Started
 
 ```bash
-pnpm install @allfeat/client
+pnpm install @allfeat/sdk
 ```
 
 ---
@@ -61,6 +68,12 @@ const provider = new AllfeatProvider('ws://your-node:9944')
 
 ---
 
+## 📁 Examples
+
+Usage examples are available in the examples/ directory for real-world integration and testing scenarios.
+
+---
+
 ## 🧪 Development
 
 To build and lint/format all packages:
@@ -68,5 +81,5 @@ To build and lint/format all packages:
 ```bash
 pnpm install
 pnpm build
-pnpm lint-format
+pnpm format && pnpm lint
 ```
