@@ -13,7 +13,6 @@ import {
   MiddsWithClient,
   MusicKey,
   MusicLanguage,
-  MusicMode,
 } from '../../index.js'
 
 export * from './types.js'
@@ -29,7 +28,6 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
     public bpm?: MusicBpm,
     public language?: MusicLanguage,
     public key?: MusicKey,
-    public mode?: MusicMode,
   ) {}
   rw_id(): Iswc {
     return this.iswc

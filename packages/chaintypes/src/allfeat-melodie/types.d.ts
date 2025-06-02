@@ -4066,7 +4066,6 @@ export type MiddsMusicalWork = {
   language?: MiddsUtilsLanguage | undefined
   bpm?: number | undefined
   key?: MiddsUtilsKey | undefined
-  mode?: MiddsUtilsMode | undefined
   workType: MiddsMusicalWorkMusicalWorkType
   participants: Array<MiddsMusicalWorkParticipant>
 }
@@ -4108,16 +4107,6 @@ export type MiddsUtilsKey =
   | 'A'
   | 'As'
   | 'B'
-
-export type MiddsUtilsMode =
-  | 'Major'
-  | 'Minor'
-  | 'Dorian'
-  | 'Phrygian'
-  | 'Lydian'
-  | 'Mixolydian'
-  | 'Aeolian'
-  | 'Locrian'
 
 export type MiddsMusicalWorkMusicalWorkType =
   | { type: 'Original' }
@@ -4170,7 +4159,6 @@ export type MiddsTrack = {
   duration: number
   bpm: number
   key: MiddsUtilsKey
-  mode?: MiddsUtilsMode | undefined
   recordingPlace: Bytes
   mixingPlace: Bytes
   masteringPlace: Bytes
@@ -5224,10 +5212,7 @@ export type SpConsensusBabeDigestsPreDigest =
       type: 'SecondaryPlain'
       value: SpConsensusBabeDigestsSecondaryPlainPreDigest
     }
-  | {
-      type: 'SecondaryVRF'
-      value: SpConsensusBabeDigestsSecondaryVRFPreDigest
-    }
+  | { type: 'SecondaryVRF'; value: SpConsensusBabeDigestsSecondaryVRFPreDigest }
 
 export type SpConsensusBabeDigestsPrimaryPreDigest = {
   authorityIndex: number
@@ -5947,10 +5932,6 @@ export type PalletMiddsError =
    * Funds can't be held at this moment.
    **/
   | 'CantHoldFunds'
-  /**
-   * authorized.
-   **/
-  | 'OverflowedAuthorizedDataCost'
 
 export type PalletMiddsMiddsWrapperMusicalWork = {
   base: PalletMiddsBaseInfos

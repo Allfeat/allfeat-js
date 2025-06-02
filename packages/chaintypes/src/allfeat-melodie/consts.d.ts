@@ -548,13 +548,6 @@ export interface ChainConsts<Rv extends RpcVersion>
     byteDepositCost: bigint
 
     /**
-     * The maximum cost a user can lock in collateral for this MIDDS entity.
-     * This help to ensure we don't go higher than the max of the balance type, in such case
-     * the user would be able to don't pay any fees higher than this value.
-     **/
-    maxDepositCost: bigint
-
-    /**
      * How many time the depositor have to wait to remove the MIDDS.
      **/
     unregisterPeriod: bigint | undefined
@@ -577,13 +570,6 @@ export interface ChainConsts<Rv extends RpcVersion>
      * The per-byte deposit cost when depositing MIDDS on-chain.
      **/
     byteDepositCost: bigint
-
-    /**
-     * The maximum cost a user can lock in collateral for this MIDDS entity.
-     * This help to ensure we don't go higher than the max of the balance type, in such case
-     * the user would be able to don't pay any fees higher than this value.
-     **/
-    maxDepositCost: bigint
 
     /**
      * How many time the depositor have to wait to remove the MIDDS.
@@ -610,13 +596,6 @@ export interface ChainConsts<Rv extends RpcVersion>
     byteDepositCost: bigint
 
     /**
-     * The maximum cost a user can lock in collateral for this MIDDS entity.
-     * This help to ensure we don't go higher than the max of the balance type, in such case
-     * the user would be able to don't pay any fees higher than this value.
-     **/
-    maxDepositCost: bigint
-
-    /**
      * How many time the depositor have to wait to remove the MIDDS.
      **/
     unregisterPeriod: bigint | undefined
@@ -639,13 +618,6 @@ export interface ChainConsts<Rv extends RpcVersion>
      * The per-byte deposit cost when depositing MIDDS on-chain.
      **/
     byteDepositCost: bigint
-
-    /**
-     * The maximum cost a user can lock in collateral for this MIDDS entity.
-     * This help to ensure we don't go higher than the max of the balance type, in such case
-     * the user would be able to don't pay any fees higher than this value.
-     **/
-    maxDepositCost: bigint
 
     /**
      * How many time the depositor have to wait to remove the MIDDS.

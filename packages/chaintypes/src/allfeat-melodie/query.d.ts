@@ -3,6 +3,7 @@
 import type {
   GenericChainStorage,
   GenericStorageQuery,
+  Callback,
   RpcVersion,
 } from 'dedot/types'
 import type {

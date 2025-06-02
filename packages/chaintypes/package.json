@@ -15,7 +15,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "gen-types-from-local": "npx dedot chaintypes -w ws://127.0.0.1:9944 -o src/",
+    "gen:from-local": "npx dedot chaintypes -w ws://127.0.0.1:9944 -o src/",
     "build": "tsc && pnpm copy",
     "build:clean": "rm -rf ./dist",
     "copy": "cp -R ./src/* ./dist && rm ./dist/index.ts",

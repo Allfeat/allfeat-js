@@ -767,11 +767,6 @@ export interface ChainErrors<Rv extends RpcVersion>
     CantHoldFunds: GenericPalletError<Rv>
 
     /**
-     * authorized.
-     **/
-    OverflowedAuthorizedDataCost: GenericPalletError<Rv>
-
-    /**
      * Generic pallet error
      **/
     [error: string]: GenericPalletError<Rv>
@@ -815,11 +810,6 @@ export interface ChainErrors<Rv extends RpcVersion>
      * Funds can't be held at this moment.
      **/
     CantHoldFunds: GenericPalletError<Rv>
-
-    /**
-     * authorized.
-     **/
-    OverflowedAuthorizedDataCost: GenericPalletError<Rv>
 
     /**
      * Generic pallet error
@@ -867,11 +857,6 @@ export interface ChainErrors<Rv extends RpcVersion>
     CantHoldFunds: GenericPalletError<Rv>
 
     /**
-     * authorized.
-     **/
-    OverflowedAuthorizedDataCost: GenericPalletError<Rv>
-
-    /**
      * Generic pallet error
      **/
     [error: string]: GenericPalletError<Rv>
@@ -915,11 +900,6 @@ export interface ChainErrors<Rv extends RpcVersion>
      * Funds can't be held at this moment.
      **/
     CantHoldFunds: GenericPalletError<Rv>
-
-    /**
-     * authorized.
-     **/
-    OverflowedAuthorizedDataCost: GenericPalletError<Rv>
 
     /**
      * Generic pallet error
