@@ -445,27 +445,26 @@ export interface ChainEvents<Rv extends RpcVersion>
     [prop: string]: GenericPalletEvent<Rv>
   }
   /**
-   * Pallet `ValidatorSet`'s events
+   * Pallet `Validators`'s events
    **/
-  validatorSet: {
-    /**
-     * New validator addition initiated. Effective in ~2 sessions.
-     **/
-    ValidatorAdditionInitiated: GenericPalletEvent<
+  validators: {
+    ValidatorAdded: GenericPalletEvent<
       Rv,
-      'ValidatorSet',
-      'ValidatorAdditionInitiated',
+      'Validators',
+      'ValidatorAdded',
       AccountId32
     >
-
-    /**
-     * Validator removal initiated. Effective in ~2 sessions.
-     **/
-    ValidatorRemovalInitiated: GenericPalletEvent<
+    ValidatorRemoved: GenericPalletEvent<
       Rv,
-      'ValidatorSet',
-      'ValidatorRemovalInitiated',
+      'Validators',
+      'ValidatorRemoved',
       AccountId32
+    >
+    ValidatorSetUpdated: GenericPalletEvent<
+      Rv,
+      'Validators',
+      'ValidatorSetUpdated',
+      null
     >
 
     /**

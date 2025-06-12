@@ -13,10 +13,10 @@ import type {
   Bytes,
   Digest,
   Phase,
-  FixedBytes,
   FixedU128,
   BytesLike,
   Data,
+  FixedBytes,
 } from 'dedot/codecs'
 import type {
   FrameSystemAccountInfo,
@@ -25,11 +25,8 @@ import type {
   FrameSystemLastRuntimeUpgradeInfo,
   FrameSystemCodeUpgradeAuthorization,
   SpWeightsWeightV2Weight,
-  SpConsensusBabeAppPublic,
+  SpConsensusAuraSr25519AppSr25519Public,
   SpConsensusSlotsSlot,
-  SpConsensusBabeDigestsNextConfigDescriptor,
-  SpConsensusBabeDigestsPreDigest,
-  SpConsensusBabeBabeEpochConfiguration,
   PalletBalancesAccountData,
   PalletBalancesBalanceLock,
   PalletBalancesReserveData,
@@ -43,7 +40,6 @@ import type {
   PalletGrandpaStoredPendingChange,
   SpConsensusGrandpaAppPublic,
   PalletImOnlineSr25519AppSr25519Public,
-  SpAuthorityDiscoveryAppPublic,
   PalletIdentityRegistration,
   PalletIdentityRegistrarInfo,
   PalletIdentityAuthorityProperties,
@@ -56,10 +52,11 @@ import type {
   PalletProxyProxyDefinition,
   PalletProxyAnnouncement,
   PalletMultisigMultisig,
-  PalletMiddsMiddsWrapper,
-  PalletMiddsMiddsWrapperMusicalWork,
-  PalletMiddsMiddsWrapperTrack,
-  PalletMiddsMiddsWrapperRelease,
+  MiddsPartyIdentifier,
+  PalletMiddsMiddsInfo,
+  MiddsMusicalWork,
+  MiddsTrack,
+  MiddsRelease,
 } from './types.js'
 
 export interface ChainStorage<Rv extends RpcVersion>
@@ -253,192 +250,27 @@ export interface ChainStorage<Rv extends RpcVersion>
     [storage: string]: GenericStorageQuery<Rv>
   }
   /**
-   * Pallet `Babe`'s storage queries
+   * Pallet `Aura`'s storage queries
    **/
-  babe: {
+  aura: {
     /**
-     * Current epoch index.
+     * The current authority set.
      *
-     * @param {Callback<bigint> =} callback
-     **/
-    epochIndex: GenericStorageQuery<Rv, () => bigint>
-
-    /**
-     * Current epoch authorities.
-     *
-     * @param {Callback<Array<[SpConsensusBabeAppPublic, bigint]>> =} callback
+     * @param {Callback<Array<SpConsensusAuraSr25519AppSr25519Public>> =} callback
      **/
     authorities: GenericStorageQuery<
       Rv,
-      () => Array<[SpConsensusBabeAppPublic, bigint]>
+      () => Array<SpConsensusAuraSr25519AppSr25519Public>
     >
 
     /**
-     * The slot at which the first epoch actually started. This is 0
-     * until the first block of the chain.
+     * The current slot of this block.
      *
-     * @param {Callback<SpConsensusSlotsSlot> =} callback
-     **/
-    genesisSlot: GenericStorageQuery<Rv, () => SpConsensusSlotsSlot>
-
-    /**
-     * Current slot number.
+     * This will be set in `on_initialize`.
      *
      * @param {Callback<SpConsensusSlotsSlot> =} callback
      **/
     currentSlot: GenericStorageQuery<Rv, () => SpConsensusSlotsSlot>
-
-    /**
-     * The epoch randomness for the *current* epoch.
-     *
-     * # Security
-     *
-     * This MUST NOT be used for gambling, as it can be influenced by a
-     * malicious validator in the short term. It MAY be used in many
-     * cryptographic protocols, however, so long as one remembers that this
-     * (like everything else on-chain) it is public. For example, it can be
-     * used where a number is needed that cannot have been chosen by an
-     * adversary, for purposes such as public-coin zero-knowledge proofs.
-     *
-     * @param {Callback<FixedBytes<32>> =} callback
-     **/
-    randomness: GenericStorageQuery<Rv, () => FixedBytes<32>>
-
-    /**
-     * Pending epoch configuration change that will be applied when the next epoch is enacted.
-     *
-     * @param {Callback<SpConsensusBabeDigestsNextConfigDescriptor | undefined> =} callback
-     **/
-    pendingEpochConfigChange: GenericStorageQuery<
-      Rv,
-      () => SpConsensusBabeDigestsNextConfigDescriptor | undefined
-    >
-
-    /**
-     * Next epoch randomness.
-     *
-     * @param {Callback<FixedBytes<32>> =} callback
-     **/
-    nextRandomness: GenericStorageQuery<Rv, () => FixedBytes<32>>
-
-    /**
-     * Next epoch authorities.
-     *
-     * @param {Callback<Array<[SpConsensusBabeAppPublic, bigint]>> =} callback
-     **/
-    nextAuthorities: GenericStorageQuery<
-      Rv,
-      () => Array<[SpConsensusBabeAppPublic, bigint]>
-    >
-
-    /**
-     * Randomness under construction.
-     *
-     * We make a trade-off between storage accesses and list length.
-     * We store the under-construction randomness in segments of up to
-     * `UNDER_CONSTRUCTION_SEGMENT_LENGTH`.
-     *
-     * Once a segment reaches this length, we begin the next one.
-     * We reset all segments and return to `0` at the beginning of every
-     * epoch.
-     *
-     * @param {Callback<number> =} callback
-     **/
-    segmentIndex: GenericStorageQuery<Rv, () => number>
-
-    /**
-     * TWOX-NOTE: `SegmentIndex` is an increasing integer, so this is okay.
-     *
-     * @param {number} arg
-     * @param {Callback<Array<FixedBytes<32>>> =} callback
-     **/
-    underConstruction: GenericStorageQuery<
-      Rv,
-      (arg: number) => Array<FixedBytes<32>>,
-      number
-    >
-
-    /**
-     * Temporary value (cleared at block finalization) which is `Some`
-     * if per-block initialization has already been called for current block.
-     *
-     * @param {Callback<SpConsensusBabeDigestsPreDigest | undefined | undefined> =} callback
-     **/
-    initialized: GenericStorageQuery<
-      Rv,
-      () => SpConsensusBabeDigestsPreDigest | undefined | undefined
-    >
-
-    /**
-     * This field should always be populated during block processing unless
-     * secondary plain slots are enabled (which don't contain a VRF output).
-     *
-     * It is set in `on_finalize`, before it will contain the value from the last block.
-     *
-     * @param {Callback<FixedBytes<32> | undefined> =} callback
-     **/
-    authorVrfRandomness: GenericStorageQuery<
-      Rv,
-      () => FixedBytes<32> | undefined
-    >
-
-    /**
-     * The block numbers when the last and current epoch have started, respectively `N-1` and
-     * `N`.
-     * NOTE: We track this is in order to annotate the block number when a given pool of
-     * entropy was fixed (i.e. it was known to chain observers). Since epochs are defined in
-     * slots, which may be skipped, the block numbers may not line up with the slot numbers.
-     *
-     * @param {Callback<[number, number]> =} callback
-     **/
-    epochStart: GenericStorageQuery<Rv, () => [number, number]>
-
-    /**
-     * How late the current block is compared to its parent.
-     *
-     * This entry is populated as part of block execution and is cleaned up
-     * on block finalization. Querying this storage entry outside of block
-     * execution context should always yield zero.
-     *
-     * @param {Callback<number> =} callback
-     **/
-    lateness: GenericStorageQuery<Rv, () => number>
-
-    /**
-     * The configuration for the current epoch. Should never be `None` as it is initialized in
-     * genesis.
-     *
-     * @param {Callback<SpConsensusBabeBabeEpochConfiguration | undefined> =} callback
-     **/
-    epochConfig: GenericStorageQuery<
-      Rv,
-      () => SpConsensusBabeBabeEpochConfiguration | undefined
-    >
-
-    /**
-     * The configuration for the next epoch, `None` if the config will not change
-     * (you can fallback to `EpochConfig` instead in that case).
-     *
-     * @param {Callback<SpConsensusBabeBabeEpochConfiguration | undefined> =} callback
-     **/
-    nextEpochConfig: GenericStorageQuery<
-      Rv,
-      () => SpConsensusBabeBabeEpochConfiguration | undefined
-    >
-
-    /**
-     * A list of the last 100 skipped epochs and the corresponding session index
-     * when the epoch was skipped.
-     *
-     * This is only used for validating equivocation proofs. An equivocation proof
-     * must contains a key-ownership proof for a given session, therefore we need a
-     * way to tie together sessions and epoch indices, i.e. we need to validate that
-     * a validator was the owner of a given key on a given session, and what the
-     * active epoch index was during that session.
-     *
-     * @param {Callback<Array<[bigint, number]>> =} callback
-     **/
-    skippedEpochs: GenericStorageQuery<Rv, () => Array<[bigint, number]>>
 
     /**
      * Generic pallet storage query
@@ -625,20 +457,14 @@ export interface ChainStorage<Rv extends RpcVersion>
     [storage: string]: GenericStorageQuery<Rv>
   }
   /**
-   * Pallet `ValidatorSet`'s storage queries
+   * Pallet `Validators`'s storage queries
    **/
-  validatorSet: {
+  validators: {
     /**
      *
      * @param {Callback<Array<AccountId32>> =} callback
      **/
     validators: GenericStorageQuery<Rv, () => Array<AccountId32>>
-
-    /**
-     *
-     * @param {Callback<Array<AccountId32>> =} callback
-     **/
-    offlineValidators: GenericStorageQuery<Rv, () => Array<AccountId32>>
 
     /**
      * Generic pallet storage query
@@ -876,32 +702,6 @@ export interface ChainStorage<Rv extends RpcVersion>
       Rv,
       (arg: [number, AccountId32Like]) => number,
       [number, AccountId32]
-    >
-
-    /**
-     * Generic pallet storage query
-     **/
-    [storage: string]: GenericStorageQuery<Rv>
-  }
-  /**
-   * Pallet `AuthorityDiscovery`'s storage queries
-   **/
-  authorityDiscovery: {
-    /**
-     * Keys of the current authority set.
-     *
-     * @param {Callback<Array<SpAuthorityDiscoveryAppPublic>> =} callback
-     **/
-    keys: GenericStorageQuery<Rv, () => Array<SpAuthorityDiscoveryAppPublic>>
-
-    /**
-     * Keys of the next authority set.
-     *
-     * @param {Callback<Array<SpAuthorityDiscoveryAppPublic>> =} callback
-     **/
-    nextKeys: GenericStorageQuery<
-      Rv,
-      () => Array<SpAuthorityDiscoveryAppPublic>
     >
 
     /**
@@ -1317,11 +1117,22 @@ export interface ChainStorage<Rv extends RpcVersion>
     /**
      *
      * @param {bigint} arg
-     * @param {Callback<PalletMiddsMiddsWrapper | undefined> =} callback
+     * @param {Callback<MiddsPartyIdentifier | undefined> =} callback
      **/
-    middsDb: GenericStorageQuery<
+    middsOf: GenericStorageQuery<
       Rv,
-      (arg: bigint) => PalletMiddsMiddsWrapper | undefined,
+      (arg: bigint) => MiddsPartyIdentifier | undefined,
+      bigint
+    >
+
+    /**
+     *
+     * @param {bigint} arg
+     * @param {Callback<PalletMiddsMiddsInfo | undefined> =} callback
+     **/
+    middsInfoOf: GenericStorageQuery<
+      Rv,
+      (arg: bigint) => PalletMiddsMiddsInfo | undefined,
       bigint
     >
 
@@ -1357,11 +1168,22 @@ export interface ChainStorage<Rv extends RpcVersion>
     /**
      *
      * @param {bigint} arg
-     * @param {Callback<PalletMiddsMiddsWrapperMusicalWork | undefined> =} callback
+     * @param {Callback<MiddsMusicalWork | undefined> =} callback
      **/
-    middsDb: GenericStorageQuery<
+    middsOf: GenericStorageQuery<
       Rv,
-      (arg: bigint) => PalletMiddsMiddsWrapperMusicalWork | undefined,
+      (arg: bigint) => MiddsMusicalWork | undefined,
+      bigint
+    >
+
+    /**
+     *
+     * @param {bigint} arg
+     * @param {Callback<PalletMiddsMiddsInfo | undefined> =} callback
+     **/
+    middsInfoOf: GenericStorageQuery<
+      Rv,
+      (arg: bigint) => PalletMiddsMiddsInfo | undefined,
       bigint
     >
 
@@ -1397,11 +1219,22 @@ export interface ChainStorage<Rv extends RpcVersion>
     /**
      *
      * @param {bigint} arg
-     * @param {Callback<PalletMiddsMiddsWrapperTrack | undefined> =} callback
+     * @param {Callback<MiddsTrack | undefined> =} callback
      **/
-    middsDb: GenericStorageQuery<
+    middsOf: GenericStorageQuery<
       Rv,
-      (arg: bigint) => PalletMiddsMiddsWrapperTrack | undefined,
+      (arg: bigint) => MiddsTrack | undefined,
+      bigint
+    >
+
+    /**
+     *
+     * @param {bigint} arg
+     * @param {Callback<PalletMiddsMiddsInfo | undefined> =} callback
+     **/
+    middsInfoOf: GenericStorageQuery<
+      Rv,
+      (arg: bigint) => PalletMiddsMiddsInfo | undefined,
       bigint
     >
 
@@ -1437,11 +1270,22 @@ export interface ChainStorage<Rv extends RpcVersion>
     /**
      *
      * @param {bigint} arg
-     * @param {Callback<PalletMiddsMiddsWrapperRelease | undefined> =} callback
+     * @param {Callback<MiddsRelease | undefined> =} callback
      **/
-    middsDb: GenericStorageQuery<
+    middsOf: GenericStorageQuery<
       Rv,
-      (arg: bigint) => PalletMiddsMiddsWrapperRelease | undefined,
+      (arg: bigint) => MiddsRelease | undefined,
+      bigint
+    >
+
+    /**
+     *
+     * @param {bigint} arg
+     * @param {Callback<PalletMiddsMiddsInfo | undefined> =} callback
+     **/
+    middsInfoOf: GenericStorageQuery<
+      Rv,
+      (arg: bigint) => PalletMiddsMiddsInfo | undefined,
       bigint
     >
 

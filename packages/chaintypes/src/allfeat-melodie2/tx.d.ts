@@ -25,12 +25,10 @@ import type {
   FrameSystemEventRecord,
   MelodieRuntimeOriginCaller,
   SpWeightsWeightV2Weight,
-  SpConsensusSlotsEquivocationProof,
-  SpSessionMembershipProof,
-  SpConsensusBabeDigestsNextConfigDescriptor,
   PalletBalancesAdjustmentDirection,
   MelodieRuntimePalletsSessionSessionKeys,
   SpConsensusGrandpaEquivocationProof,
+  SpSessionMembershipProof,
   PalletImOnlineHeartbeat,
   PalletImOnlineSr25519AppSr25519Signature,
   PalletIdentityLegacyIdentityInfo,
@@ -594,101 +592,6 @@ export interface ChainTx<Rv extends RpcVersion>
     [callName: string]: GenericTxCall<Rv, TxCall<Rv>>
   }
   /**
-   * Pallet `Babe`'s transaction calls
-   **/
-  babe: {
-    /**
-     * Report authority equivocation/misbehavior. This method will verify
-     * the equivocation proof and validate the given key ownership proof
-     * against the extracted offender. If both are valid, the offence will
-     * be reported.
-     *
-     * @param {SpConsensusSlotsEquivocationProof} equivocationProof
-     * @param {SpSessionMembershipProof} keyOwnerProof
-     **/
-    reportEquivocation: GenericTxCall<
-      Rv,
-      (
-        equivocationProof: SpConsensusSlotsEquivocationProof,
-        keyOwnerProof: SpSessionMembershipProof,
-      ) => ChainSubmittableExtrinsic<
-        Rv,
-        {
-          pallet: 'Babe'
-          palletCall: {
-            name: 'ReportEquivocation'
-            params: {
-              equivocationProof: SpConsensusSlotsEquivocationProof
-              keyOwnerProof: SpSessionMembershipProof
-            }
-          }
-        }
-      >
-    >
-
-    /**
-     * Report authority equivocation/misbehavior. This method will verify
-     * the equivocation proof and validate the given key ownership proof
-     * against the extracted offender. If both are valid, the offence will
-     * be reported.
-     * This extrinsic must be called unsigned and it is expected that only
-     * block authors will call it (validated in `ValidateUnsigned`), as such
-     * if the block author is defined it will be defined as the equivocation
-     * reporter.
-     *
-     * @param {SpConsensusSlotsEquivocationProof} equivocationProof
-     * @param {SpSessionMembershipProof} keyOwnerProof
-     **/
-    reportEquivocationUnsigned: GenericTxCall<
-      Rv,
-      (
-        equivocationProof: SpConsensusSlotsEquivocationProof,
-        keyOwnerProof: SpSessionMembershipProof,
-      ) => ChainSubmittableExtrinsic<
-        Rv,
-        {
-          pallet: 'Babe'
-          palletCall: {
-            name: 'ReportEquivocationUnsigned'
-            params: {
-              equivocationProof: SpConsensusSlotsEquivocationProof
-              keyOwnerProof: SpSessionMembershipProof
-            }
-          }
-        }
-      >
-    >
-
-    /**
-     * Plan an epoch config change. The epoch config change is recorded and will be enacted on
-     * the next call to `enact_epoch_change`. The config will be activated one epoch after.
-     * Multiple calls to this method will replace any existing planned config change that had
-     * not been enacted yet.
-     *
-     * @param {SpConsensusBabeDigestsNextConfigDescriptor} config
-     **/
-    planConfigChange: GenericTxCall<
-      Rv,
-      (
-        config: SpConsensusBabeDigestsNextConfigDescriptor,
-      ) => ChainSubmittableExtrinsic<
-        Rv,
-        {
-          pallet: 'Babe'
-          palletCall: {
-            name: 'PlanConfigChange'
-            params: { config: SpConsensusBabeDigestsNextConfigDescriptor }
-          }
-        }
-      >
-    >
-
-    /**
-     * Generic pallet tx call
-     **/
-    [callName: string]: GenericTxCall<Rv, TxCall<Rv>>
-  }
-  /**
    * Pallet `Timestamp`'s transaction calls
    **/
   timestamp: {
@@ -1003,51 +906,42 @@ export interface ChainTx<Rv extends RpcVersion>
     [callName: string]: GenericTxCall<Rv, TxCall<Rv>>
   }
   /**
-   * Pallet `ValidatorSet`'s transaction calls
+   * Pallet `Validators`'s transaction calls
    **/
-  validatorSet: {
+  validators: {
     /**
-     * Add a new validator.
+     * Add a new validator (Root or governance controlled)
      *
-     * New validator's session keys should be set in Session pallet before
-     * calling this.
-     *
-     * The origin can be configured using the `AddRemoveOrigin` type in the
-     * host runtime. Can also be set to sudo/root.
-     *
-     * @param {AccountId32Like} validatorId
+     * @param {AccountId32Like} validator
      **/
     addValidator: GenericTxCall<
       Rv,
-      (validatorId: AccountId32Like) => ChainSubmittableExtrinsic<
+      (validator: AccountId32Like) => ChainSubmittableExtrinsic<
         Rv,
         {
-          pallet: 'ValidatorSet'
+          pallet: 'Validators'
           palletCall: {
             name: 'AddValidator'
-            params: { validatorId: AccountId32Like }
+            params: { validator: AccountId32Like }
           }
         }
       >
     >
 
     /**
-     * Remove a validator.
+     * Remove a validator
      *
-     * The origin can be configured using the `AddRemoveOrigin` type in the
-     * host runtime. Can also be set to sudo/root.
-     *
-     * @param {AccountId32Like} validatorId
+     * @param {AccountId32Like} validator
      **/
     removeValidator: GenericTxCall<
       Rv,
-      (validatorId: AccountId32Like) => ChainSubmittableExtrinsic<
+      (validator: AccountId32Like) => ChainSubmittableExtrinsic<
         Rv,
         {
-          pallet: 'ValidatorSet'
+          pallet: 'Validators'
           palletCall: {
             name: 'RemoveValidator'
-            params: { validatorId: AccountId32Like }
+            params: { validator: AccountId32Like }
           }
         }
       >

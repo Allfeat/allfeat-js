@@ -70,34 +70,16 @@ export interface ChainConsts<Rv extends RpcVersion>
     [name: string]: any
   }
   /**
-   * Pallet `Babe`'s constants
+   * Pallet `Aura`'s constants
    **/
-  babe: {
+  aura: {
     /**
-     * The amount of time, in slots, that each epoch should last.
-     * NOTE: Currently it is not possible to change the epoch duration after
-     * the chain has started. Attempting to do so will brick block production.
+     * The slot duration Aura should run with, expressed in milliseconds.
+     * The effective value of this type should not change while the chain is running.
+     *
+     * For backwards compatibility either use [`MinimumPeriodTimesTwo`] or a const.
      **/
-    epochDuration: bigint
-
-    /**
-     * The expected average block time at which BABE should be creating
-     * blocks. Since BABE is probabilistic it is not trivial to figure out
-     * what the expected average block time should be based on the slot
-     * duration and the security parameter `c` (where `1 - c` represents
-     * the probability of a slot being empty).
-     **/
-    expectedBlockTime: bigint
-
-    /**
-     * Max number of authorities allowed
-     **/
-    maxAuthorities: number
-
-    /**
-     * The maximum number of nominators for each validator.
-     **/
-    maxNominators: number
+    slotDuration: bigint
 
     /**
      * Generic pallet constant
@@ -208,9 +190,14 @@ export interface ChainConsts<Rv extends RpcVersion>
     [name: string]: any
   }
   /**
-   * Pallet `ValidatorSet`'s constants
+   * Pallet `Validators`'s constants
    **/
-  validatorSet: {
+  validators: {
+    /**
+     * Max number of validators in the set
+     **/
+    maxValidators: number
+
     /**
      * Generic pallet constant
      **/
@@ -275,15 +262,6 @@ export interface ChainConsts<Rv extends RpcVersion>
      **/
     unsignedPriority: bigint
 
-    /**
-     * Generic pallet constant
-     **/
-    [name: string]: any
-  }
-  /**
-   * Pallet `AuthorityDiscovery`'s constants
-   **/
-  authorityDiscovery: {
     /**
      * Generic pallet constant
      **/

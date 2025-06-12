@@ -81,35 +81,6 @@ export interface ChainErrors<Rv extends RpcVersion>
     [error: string]: GenericPalletError<Rv>
   }
   /**
-   * Pallet `Babe`'s errors
-   **/
-  babe: {
-    /**
-     * An equivocation proof provided as part of an equivocation report is invalid.
-     **/
-    InvalidEquivocationProof: GenericPalletError<Rv>
-
-    /**
-     * A key ownership proof provided as part of an equivocation report is invalid.
-     **/
-    InvalidKeyOwnershipProof: GenericPalletError<Rv>
-
-    /**
-     * A given equivocation report is valid but already previously reported.
-     **/
-    DuplicateOffenceReport: GenericPalletError<Rv>
-
-    /**
-     * Submitted configuration is invalid.
-     **/
-    InvalidConfiguration: GenericPalletError<Rv>
-
-    /**
-     * Generic pallet error
-     **/
-    [error: string]: GenericPalletError<Rv>
-  }
-  /**
    * Pallet `Balances`'s errors
    **/
   balances: {
@@ -179,18 +150,12 @@ export interface ChainErrors<Rv extends RpcVersion>
     [error: string]: GenericPalletError<Rv>
   }
   /**
-   * Pallet `ValidatorSet`'s errors
+   * Pallet `Validators`'s errors
    **/
-  validatorSet: {
-    /**
-     * Target (post-removal) validator count is below the minimum.
-     **/
-    TooLowValidatorCount: GenericPalletError<Rv>
-
-    /**
-     * Validator is already in the validator set.
-     **/
-    Duplicate: GenericPalletError<Rv>
+  validators: {
+    ValidatorAlreadyPresent: GenericPalletError<Rv>
+    ValidatorNotFound: GenericPalletError<Rv>
+    TooManyValidators: GenericPalletError<Rv>
 
     /**
      * Generic pallet error

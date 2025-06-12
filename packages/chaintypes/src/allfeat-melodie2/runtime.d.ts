@@ -29,17 +29,12 @@ import type {
   SpConsensusGrandpaAppPublic,
   SpConsensusGrandpaEquivocationProof,
   SpRuntimeOpaqueValue,
-  SpConsensusBabeBabeConfiguration,
-  SpConsensusSlotsSlot,
-  SpConsensusBabeEpoch,
-  SpConsensusBabeOpaqueKeyOwnershipProof,
-  SpConsensusBabeAppPublic,
-  SpConsensusSlotsEquivocationProof,
-  SpAuthorityDiscoveryAppPublic,
   PalletTransactionPaymentRuntimeDispatchInfo,
   PalletTransactionPaymentFeeDetails,
   SpWeightsWeightV2Weight,
   MelodieRuntimeRuntimeCallLike,
+  SpConsensusSlotsSlotDuration,
+  SpConsensusAuraSr25519AppSr25519Public,
   SpCoreCryptoKeyTypeId,
 } from './types.js'
 
@@ -320,119 +315,6 @@ export interface RuntimeApis<Rv extends RpcVersion>
     [method: string]: GenericRuntimeApiMethod<Rv>
   }
   /**
-   * @runtimeapi: BabeApi - 0xcbca25e39f142387
-   **/
-  babeApi: {
-    /**
-     * Return the configuration for BABE.
-     *
-     * @callname: BabeApi_configuration
-     **/
-    configuration: GenericRuntimeApiMethod<
-      Rv,
-      () => Promise<SpConsensusBabeBabeConfiguration>
-    >
-
-    /**
-     * Returns the slot that started the current epoch.
-     *
-     * @callname: BabeApi_current_epoch_start
-     **/
-    currentEpochStart: GenericRuntimeApiMethod<
-      Rv,
-      () => Promise<SpConsensusSlotsSlot>
-    >
-
-    /**
-     * Returns information regarding the current epoch.
-     *
-     * @callname: BabeApi_current_epoch
-     **/
-    currentEpoch: GenericRuntimeApiMethod<
-      Rv,
-      () => Promise<SpConsensusBabeEpoch>
-    >
-
-    /**
-     * Returns information regarding the next epoch (which was already
-     * previously announced).
-     *
-     * @callname: BabeApi_next_epoch
-     **/
-    nextEpoch: GenericRuntimeApiMethod<Rv, () => Promise<SpConsensusBabeEpoch>>
-
-    /**
-     * Generates a proof of key ownership for the given authority in the
-     * current epoch. An example usage of this module is coupled with the
-     * session historical module to prove that a given authority key is
-     * tied to a given staking identity during a specific session. Proofs
-     * of key ownership are necessary for submitting equivocation reports.
-     * NOTE: even though the API takes a `slot` as parameter the current
-     * implementations ignores this parameter and instead relies on this
-     * method being called at the correct block height, i.e. any point at
-     * which the epoch for the given slot is live on-chain. Future
-     * implementations will instead use indexed data through an offchain
-     * worker, not requiring older states to be available.
-     *
-     * @callname: BabeApi_generate_key_ownership_proof
-     * @param {SpConsensusSlotsSlot} slot
-     * @param {SpConsensusBabeAppPublic} authority_id
-     **/
-    generateKeyOwnershipProof: GenericRuntimeApiMethod<
-      Rv,
-      (
-        slot: SpConsensusSlotsSlot,
-        authorityId: SpConsensusBabeAppPublic,
-      ) => Promise<SpConsensusBabeOpaqueKeyOwnershipProof | undefined>
-    >
-
-    /**
-     * Submits an unsigned extrinsic to report an equivocation. The caller
-     * must provide the equivocation proof and a key ownership proof
-     * (should be obtained using `generate_key_ownership_proof`). The
-     * extrinsic will be unsigned and should only be accepted for local
-     * authorship (not to be broadcast to the network). This method returns
-     * `None` when creation of the extrinsic fails, e.g. if equivocation
-     * reporting is disabled for the given runtime (i.e. this method is
-     * hardcoded to return `None`). Only useful in an offchain context.
-     *
-     * @callname: BabeApi_submit_report_equivocation_unsigned_extrinsic
-     * @param {SpConsensusSlotsEquivocationProof} equivocation_proof
-     * @param {SpConsensusBabeOpaqueKeyOwnershipProof} key_owner_proof
-     **/
-    submitReportEquivocationUnsignedExtrinsic: GenericRuntimeApiMethod<
-      Rv,
-      (
-        equivocationProof: SpConsensusSlotsEquivocationProof,
-        keyOwnerProof: SpConsensusBabeOpaqueKeyOwnershipProof,
-      ) => Promise<[] | undefined>
-    >
-
-    /**
-     * Generic runtime api call
-     **/
-    [method: string]: GenericRuntimeApiMethod<Rv>
-  }
-  /**
-   * @runtimeapi: AuthorityDiscoveryApi - 0x687ad44ad37f03c2
-   **/
-  authorityDiscoveryApi: {
-    /**
-     * Retrieve authority identifiers of the current and next authority set.
-     *
-     * @callname: AuthorityDiscoveryApi_authorities
-     **/
-    authorities: GenericRuntimeApiMethod<
-      Rv,
-      () => Promise<Array<SpAuthorityDiscoveryAppPublic>>
-    >
-
-    /**
-     * Generic runtime api call
-     **/
-    [method: string]: GenericRuntimeApiMethod<Rv>
-  }
-  /**
    * @runtimeapi: AccountNonceApi - 0xbc9d89904f5b923f
    **/
   accountNonceApi: {
@@ -563,6 +445,37 @@ export interface RuntimeApis<Rv extends RpcVersion>
     queryLengthToFee: GenericRuntimeApiMethod<
       Rv,
       (length: number) => Promise<bigint>
+    >
+
+    /**
+     * Generic runtime api call
+     **/
+    [method: string]: GenericRuntimeApiMethod<Rv>
+  }
+  /**
+   * @runtimeapi: AuraApi - 0xdd718d5cc53262d4
+   **/
+  auraApi: {
+    /**
+     * Returns the slot duration for Aura.
+     *
+     * Currently, only the value provided by this type at genesis will be used.
+     *
+     * @callname: AuraApi_slot_duration
+     **/
+    slotDuration: GenericRuntimeApiMethod<
+      Rv,
+      () => Promise<SpConsensusSlotsSlotDuration>
+    >
+
+    /**
+     * Return the current set of authorities.
+     *
+     * @callname: AuraApi_authorities
+     **/
+    authorities: GenericRuntimeApiMethod<
+      Rv,
+      () => Promise<Array<SpConsensusAuraSr25519AppSr25519Public>>
     >
 
     /**

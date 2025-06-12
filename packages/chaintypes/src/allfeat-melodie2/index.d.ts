@@ -16,7 +16,7 @@ import { ChainTx } from './tx.js'
 
 export * from './types.js'
 
-export interface VersionedAllfeatMelodieApi<Rv extends RpcVersion>
+export interface VersionedAllfeatMelodie2Api<Rv extends RpcVersion>
   extends GenericSubstrateApi<Rv> {
   rpc: ChainJsonRpcApis<Rv>
   consts: ChainConsts<Rv>
@@ -28,10 +28,10 @@ export interface VersionedAllfeatMelodieApi<Rv extends RpcVersion>
 }
 
 /**
- * @name: AllfeatMelodieApi
- * @specVersion: 100
+ * @name: AllfeatMelodie2Api
+ * @specVersion: 200
  **/
-export interface AllfeatMelodieApi {
-  legacy: VersionedAllfeatMelodieApi<RpcLegacy>
-  v2: VersionedAllfeatMelodieApi<RpcV2>
+export interface AllfeatMelodie2Api {
+  legacy: VersionedAllfeatMelodie2Api<RpcLegacy>
+  v2: VersionedAllfeatMelodie2Api<RpcV2>
 }

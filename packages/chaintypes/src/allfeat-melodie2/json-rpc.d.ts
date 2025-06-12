@@ -13,7 +13,6 @@ export type ChainJsonRpcApis<Rv extends RpcVersion> = Pick<
   | 'author_rotateKeys'
   | 'author_submitAndWatchExtrinsic'
   | 'author_submitExtrinsic'
-  | 'babe_epochAuthorship'
   | 'chainHead_v1_body'
   | 'chainHead_v1_call'
   | 'chainHead_v1_continue'

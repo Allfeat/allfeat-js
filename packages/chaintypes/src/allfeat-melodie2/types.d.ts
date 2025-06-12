@@ -9,13 +9,13 @@ import type {
   FixedBytes,
   Bytes,
   BytesLike,
-  Header,
   MultiAddress,
   MultiAddressLike,
   AccountId32Like,
   Data,
   Perbill,
   Era,
+  Header,
   UncheckedExtrinsic,
 } from 'dedot/codecs'
 
@@ -55,7 +55,7 @@ export type MelodieRuntimeRuntimeEvent =
   | { pallet: 'Utility'; palletEvent: PalletUtilityEvent }
   | { pallet: 'Balances'; palletEvent: PalletBalancesEvent }
   | { pallet: 'TransactionPayment'; palletEvent: PalletTransactionPaymentEvent }
-  | { pallet: 'ValidatorSet'; palletEvent: PalletValidatorSetEvent }
+  | { pallet: 'Validators'; palletEvent: PalletValidatorsEvent }
   | { pallet: 'Session'; palletEvent: PalletSessionEvent }
   | { pallet: 'Grandpa'; palletEvent: PalletGrandpaEvent }
   | { pallet: 'Sudo'; palletEvent: PalletSudoEvent }
@@ -314,15 +314,10 @@ export type PalletTransactionPaymentEvent =
 /**
  * The `Event` enum of this pallet
  **/
-export type PalletValidatorSetEvent =
-  /**
-   * New validator addition initiated. Effective in ~2 sessions.
-   **/
-  | { name: 'ValidatorAdditionInitiated'; data: AccountId32 }
-  /**
-   * Validator removal initiated. Effective in ~2 sessions.
-   **/
-  | { name: 'ValidatorRemovalInitiated'; data: AccountId32 }
+export type PalletValidatorsEvent =
+  | { name: 'ValidatorAdded'; data: AccountId32 }
+  | { name: 'ValidatorRemoved'; data: AccountId32 }
+  | { name: 'ValidatorSetUpdated' }
 
 /**
  * The `Event` enum of this pallet
@@ -1391,10 +1386,9 @@ export type PalletUtilityCallLike =
 export type MelodieRuntimeRuntimeCall =
   | { pallet: 'System'; palletCall: FrameSystemCall }
   | { pallet: 'Utility'; palletCall: PalletUtilityCall }
-  | { pallet: 'Babe'; palletCall: PalletBabeCall }
   | { pallet: 'Timestamp'; palletCall: PalletTimestampCall }
   | { pallet: 'Balances'; palletCall: PalletBalancesCall }
-  | { pallet: 'ValidatorSet'; palletCall: PalletValidatorSetCall }
+  | { pallet: 'Validators'; palletCall: PalletValidatorsCall }
   | { pallet: 'Session'; palletCall: PalletSessionCall }
   | { pallet: 'Grandpa'; palletCall: PalletGrandpaCall }
   | { pallet: 'Sudo'; palletCall: PalletSudoCall }
@@ -1413,10 +1407,9 @@ export type MelodieRuntimeRuntimeCall =
 export type MelodieRuntimeRuntimeCallLike =
   | { pallet: 'System'; palletCall: FrameSystemCallLike }
   | { pallet: 'Utility'; palletCall: PalletUtilityCallLike }
-  | { pallet: 'Babe'; palletCall: PalletBabeCallLike }
   | { pallet: 'Timestamp'; palletCall: PalletTimestampCallLike }
   | { pallet: 'Balances'; palletCall: PalletBalancesCallLike }
-  | { pallet: 'ValidatorSet'; palletCall: PalletValidatorSetCallLike }
+  | { pallet: 'Validators'; palletCall: PalletValidatorsCallLike }
   | { pallet: 'Session'; palletCall: PalletSessionCallLike }
   | { pallet: 'Grandpa'; palletCall: PalletGrandpaCallLike }
   | { pallet: 'Sudo'; palletCall: PalletSudoCallLike }
@@ -1431,120 +1424,6 @@ export type MelodieRuntimeRuntimeCallLike =
   | { pallet: 'MusicalWorks'; palletCall: PalletMiddsCallLike002 }
   | { pallet: 'Tracks'; palletCall: PalletMiddsCallLike003 }
   | { pallet: 'Releases'; palletCall: PalletMiddsCallLike004 }
-
-/**
- * Contains a variant per dispatchable extrinsic that this pallet has.
- **/
-export type PalletBabeCall =
-  /**
-   * Report authority equivocation/misbehavior. This method will verify
-   * the equivocation proof and validate the given key ownership proof
-   * against the extracted offender. If both are valid, the offence will
-   * be reported.
-   **/
-  | {
-      name: 'ReportEquivocation'
-      params: {
-        equivocationProof: SpConsensusSlotsEquivocationProof
-        keyOwnerProof: SpSessionMembershipProof
-      }
-    }
-  /**
-   * Report authority equivocation/misbehavior. This method will verify
-   * the equivocation proof and validate the given key ownership proof
-   * against the extracted offender. If both are valid, the offence will
-   * be reported.
-   * This extrinsic must be called unsigned and it is expected that only
-   * block authors will call it (validated in `ValidateUnsigned`), as such
-   * if the block author is defined it will be defined as the equivocation
-   * reporter.
-   **/
-  | {
-      name: 'ReportEquivocationUnsigned'
-      params: {
-        equivocationProof: SpConsensusSlotsEquivocationProof
-        keyOwnerProof: SpSessionMembershipProof
-      }
-    }
-  /**
-   * Plan an epoch config change. The epoch config change is recorded and will be enacted on
-   * the next call to `enact_epoch_change`. The config will be activated one epoch after.
-   * Multiple calls to this method will replace any existing planned config change that had
-   * not been enacted yet.
-   **/
-  | {
-      name: 'PlanConfigChange'
-      params: { config: SpConsensusBabeDigestsNextConfigDescriptor }
-    }
-
-export type PalletBabeCallLike =
-  /**
-   * Report authority equivocation/misbehavior. This method will verify
-   * the equivocation proof and validate the given key ownership proof
-   * against the extracted offender. If both are valid, the offence will
-   * be reported.
-   **/
-  | {
-      name: 'ReportEquivocation'
-      params: {
-        equivocationProof: SpConsensusSlotsEquivocationProof
-        keyOwnerProof: SpSessionMembershipProof
-      }
-    }
-  /**
-   * Report authority equivocation/misbehavior. This method will verify
-   * the equivocation proof and validate the given key ownership proof
-   * against the extracted offender. If both are valid, the offence will
-   * be reported.
-   * This extrinsic must be called unsigned and it is expected that only
-   * block authors will call it (validated in `ValidateUnsigned`), as such
-   * if the block author is defined it will be defined as the equivocation
-   * reporter.
-   **/
-  | {
-      name: 'ReportEquivocationUnsigned'
-      params: {
-        equivocationProof: SpConsensusSlotsEquivocationProof
-        keyOwnerProof: SpSessionMembershipProof
-      }
-    }
-  /**
-   * Plan an epoch config change. The epoch config change is recorded and will be enacted on
-   * the next call to `enact_epoch_change`. The config will be activated one epoch after.
-   * Multiple calls to this method will replace any existing planned config change that had
-   * not been enacted yet.
-   **/
-  | {
-      name: 'PlanConfigChange'
-      params: { config: SpConsensusBabeDigestsNextConfigDescriptor }
-    }
-
-export type SpConsensusSlotsEquivocationProof = {
-  offender: SpConsensusBabeAppPublic
-  slot: SpConsensusSlotsSlot
-  firstHeader: Header
-  secondHeader: Header
-}
-
-export type SpConsensusBabeAppPublic = FixedBytes<32>
-
-export type SpConsensusSlotsSlot = bigint
-
-export type SpSessionMembershipProof = {
-  session: number
-  trieNodes: Array<Bytes>
-  validatorCount: number
-}
-
-export type SpConsensusBabeDigestsNextConfigDescriptor = {
-  type: 'V1'
-  value: { c: [bigint, bigint]; allowedSlots: SpConsensusBabeAllowedSlots }
-}
-
-export type SpConsensusBabeAllowedSlots =
-  | 'PrimarySlots'
-  | 'PrimaryAndSecondaryPlainSlots'
-  | 'PrimaryAndSecondaryVRFSlots'
 
 /**
  * Contains a variant per dispatchable extrinsic that this pallet has.
@@ -1809,43 +1688,25 @@ export type PalletBalancesAdjustmentDirection = 'Increase' | 'Decrease'
 /**
  * Contains a variant per dispatchable extrinsic that this pallet has.
  **/
-export type PalletValidatorSetCall =
+export type PalletValidatorsCall =
   /**
-   * Add a new validator.
-   *
-   * New validator's session keys should be set in Session pallet before
-   * calling this.
-   *
-   * The origin can be configured using the `AddRemoveOrigin` type in the
-   * host runtime. Can also be set to sudo/root.
+   * Add a new validator (Root or governance controlled)
    **/
-  | { name: 'AddValidator'; params: { validatorId: AccountId32 } }
+  | { name: 'AddValidator'; params: { validator: AccountId32 } }
   /**
-   * Remove a validator.
-   *
-   * The origin can be configured using the `AddRemoveOrigin` type in the
-   * host runtime. Can also be set to sudo/root.
+   * Remove a validator
    **/
-  | { name: 'RemoveValidator'; params: { validatorId: AccountId32 } }
+  | { name: 'RemoveValidator'; params: { validator: AccountId32 } }
 
-export type PalletValidatorSetCallLike =
+export type PalletValidatorsCallLike =
   /**
-   * Add a new validator.
-   *
-   * New validator's session keys should be set in Session pallet before
-   * calling this.
-   *
-   * The origin can be configured using the `AddRemoveOrigin` type in the
-   * host runtime. Can also be set to sudo/root.
+   * Add a new validator (Root or governance controlled)
    **/
-  | { name: 'AddValidator'; params: { validatorId: AccountId32Like } }
+  | { name: 'AddValidator'; params: { validator: AccountId32Like } }
   /**
-   * Remove a validator.
-   *
-   * The origin can be configured using the `AddRemoveOrigin` type in the
-   * host runtime. Can also be set to sudo/root.
+   * Remove a validator
    **/
-  | { name: 'RemoveValidator'; params: { validatorId: AccountId32Like } }
+  | { name: 'RemoveValidator'; params: { validator: AccountId32Like } }
 
 /**
  * Contains a variant per dispatchable extrinsic that this pallet has.
@@ -1919,12 +1780,11 @@ export type PalletSessionCallLike =
 
 export type MelodieRuntimePalletsSessionSessionKeys = {
   grandpa: SpConsensusGrandpaAppPublic
-  babe: SpConsensusBabeAppPublic
+  aura: SpConsensusAuraSr25519AppSr25519Public
   imOnline: PalletImOnlineSr25519AppSr25519Public
-  authorityDiscovery: SpAuthorityDiscoveryAppPublic
 }
 
-export type SpAuthorityDiscoveryAppPublic = FixedBytes<32>
+export type SpConsensusAuraSr25519AppSr25519Public = FixedBytes<32>
 
 /**
  * Contains a variant per dispatchable extrinsic that this pallet has.
@@ -2061,6 +1921,12 @@ export type FinalityGrandpaEquivocationPrecommit = {
 export type FinalityGrandpaPrecommit = {
   targetHash: H256
   targetNumber: number
+}
+
+export type SpSessionMembershipProof = {
+  session: number
+  trieNodes: Array<Bytes>
+  validatorCount: number
 }
 
 /**
@@ -4122,10 +3988,10 @@ export type MiddsMusicalWorkAdapationWork = {
 
 export type MiddsMusicalWorkParticipant = {
   id: bigint
-  role: MiddsMusicalWorkPartipantRole
+  role: MiddsMusicalWorkParticipantRole
 }
 
-export type MiddsMusicalWorkPartipantRole =
+export type MiddsMusicalWorkParticipantRole =
   | 'Author'
   | 'Composer'
   | 'Arranger'
@@ -5206,61 +5072,7 @@ export type PalletUtilityError =
    **/
   'TooManyCalls'
 
-export type SpConsensusBabeDigestsPreDigest =
-  | { type: 'Primary'; value: SpConsensusBabeDigestsPrimaryPreDigest }
-  | {
-      type: 'SecondaryPlain'
-      value: SpConsensusBabeDigestsSecondaryPlainPreDigest
-    }
-  | { type: 'SecondaryVRF'; value: SpConsensusBabeDigestsSecondaryVRFPreDigest }
-
-export type SpConsensusBabeDigestsPrimaryPreDigest = {
-  authorityIndex: number
-  slot: SpConsensusSlotsSlot
-  vrfSignature: SpCoreSr25519VrfVrfSignature
-}
-
-export type SpCoreSr25519VrfVrfSignature = {
-  preOutput: FixedBytes<32>
-  proof: FixedBytes<64>
-}
-
-export type SpConsensusBabeDigestsSecondaryPlainPreDigest = {
-  authorityIndex: number
-  slot: SpConsensusSlotsSlot
-}
-
-export type SpConsensusBabeDigestsSecondaryVRFPreDigest = {
-  authorityIndex: number
-  slot: SpConsensusSlotsSlot
-  vrfSignature: SpCoreSr25519VrfVrfSignature
-}
-
-export type SpConsensusBabeBabeEpochConfiguration = {
-  c: [bigint, bigint]
-  allowedSlots: SpConsensusBabeAllowedSlots
-}
-
-/**
- * The `Error` enum of this pallet.
- **/
-export type PalletBabeError =
-  /**
-   * An equivocation proof provided as part of an equivocation report is invalid.
-   **/
-  | 'InvalidEquivocationProof'
-  /**
-   * A key ownership proof provided as part of an equivocation report is invalid.
-   **/
-  | 'InvalidKeyOwnershipProof'
-  /**
-   * A given equivocation report is valid but already previously reported.
-   **/
-  | 'DuplicateOffenceReport'
-  /**
-   * Submitted configuration is invalid.
-   **/
-  | 'InvalidConfiguration'
+export type SpConsensusSlotsSlot = bigint
 
 export type PalletBalancesBalanceLock = {
   id: FixedBytes<8>
@@ -5356,15 +5168,10 @@ export type PalletTransactionPaymentReleases = 'V1Ancient' | 'V2'
 /**
  * The `Error` enum of this pallet.
  **/
-export type PalletValidatorSetError =
-  /**
-   * Target (post-removal) validator count is below the minimum.
-   **/
-  | 'TooLowValidatorCount'
-  /**
-   * Validator is already in the validator set.
-   **/
-  | 'Duplicate'
+export type PalletValidatorsError =
+  | 'ValidatorAlreadyPresent'
+  | 'ValidatorNotFound'
+  | 'TooManyValidators'
 
 export type SpStakingOffenceOffenceSeverity = Perbill
 
@@ -5887,14 +5694,12 @@ export type PalletSafeModeError =
    **/
   | 'CurrencyError'
 
-export type PalletMiddsMiddsWrapper = {
-  base: PalletMiddsBaseInfos
-  midds: MiddsPartyIdentifier
-}
-
-export type PalletMiddsBaseInfos = {
+export type PalletMiddsMiddsInfo = {
   provider: AccountId32
   registeredAt: bigint
+  hash: FixedBytes<32>
+  encodedSize: number
+  dataCost: bigint
 }
 
 export type FrameSupportPalletId = FixedBytes<8>
@@ -5932,21 +5737,6 @@ export type PalletMiddsError =
    * Funds can't be held at this moment.
    **/
   | 'CantHoldFunds'
-
-export type PalletMiddsMiddsWrapperMusicalWork = {
-  base: PalletMiddsBaseInfos
-  midds: MiddsMusicalWork
-}
-
-export type PalletMiddsMiddsWrapperTrack = {
-  base: PalletMiddsBaseInfos
-  midds: MiddsTrack
-}
-
-export type PalletMiddsMiddsWrapperRelease = {
-  base: PalletMiddsBaseInfos
-  midds: MiddsRelease
-}
 
 export type FrameSystemExtensionsCheckNonZeroSender = {}
 
@@ -6028,26 +5818,6 @@ export type SpRuntimeTransactionValidityValidTransaction = {
 
 export type SpRuntimeOpaqueValue = Bytes
 
-export type SpConsensusBabeBabeConfiguration = {
-  slotDuration: bigint
-  epochLength: bigint
-  c: [bigint, bigint]
-  authorities: Array<[SpConsensusBabeAppPublic, bigint]>
-  randomness: FixedBytes<32>
-  allowedSlots: SpConsensusBabeAllowedSlots
-}
-
-export type SpConsensusBabeEpoch = {
-  epochIndex: bigint
-  startSlot: SpConsensusSlotsSlot
-  duration: bigint
-  authorities: Array<[SpConsensusBabeAppPublic, bigint]>
-  randomness: FixedBytes<32>
-  config: SpConsensusBabeBabeEpochConfiguration
-}
-
-export type SpConsensusBabeOpaqueKeyOwnershipProof = Bytes
-
 export type PalletTransactionPaymentRuntimeDispatchInfo = {
   weight: SpWeightsWeightV2Weight
   class: FrameSupportDispatchDispatchClass
@@ -6065,12 +5835,13 @@ export type PalletTransactionPaymentInclusionFee = {
   adjustedWeightFee: bigint
 }
 
+export type SpConsensusSlotsSlotDuration = bigint
+
 export type MelodieRuntimeRuntimeError =
   | { pallet: 'System'; palletError: FrameSystemError }
   | { pallet: 'Utility'; palletError: PalletUtilityError }
-  | { pallet: 'Babe'; palletError: PalletBabeError }
   | { pallet: 'Balances'; palletError: PalletBalancesError }
-  | { pallet: 'ValidatorSet'; palletError: PalletValidatorSetError }
+  | { pallet: 'Validators'; palletError: PalletValidatorsError }
   | { pallet: 'Session'; palletError: PalletSessionError }
   | { pallet: 'Grandpa'; palletError: PalletGrandpaError }
   | { pallet: 'Sudo'; palletError: PalletSudoError }
