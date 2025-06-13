@@ -15,14 +15,6 @@ export class WorkTitle extends MiddsString {
 
 export type isInstrumentalWork = boolean
 
-export type WorkCreationYear = number & { __type: 'WorkCreationYear' }
-export function asWorkYear(n: number): WorkCreationYear {
-  if (!Number.isInteger(n) || n < 1 || n > 2999) {
-    throw new Error(`Invalid work creation year: ${n}`)
-  }
-  return n as WorkCreationYear
-}
-
 export type WorkType = OriginalWork | MedleyWork | MashupWork | AdaptationWork
 
 export class OriginalWork

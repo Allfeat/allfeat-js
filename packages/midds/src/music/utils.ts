@@ -72,3 +72,14 @@ export class MusicBpm extends MiddsUint {
     return 300 // upper bound for musical tempo
   }
 }
+
+/**
+ * Generic type representing a Year to ensure logic year input.
+ */
+export type Year = number & { __type: 'Year' }
+export function asYear(n: number): Year {
+  if (!Number.isInteger(n) || n < 1 || n > 2999) {
+    throw new Error(`Invalid year: ${n}`)
+  }
+  return n as Year
+}

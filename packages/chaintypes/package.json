@@ -9,7 +9,7 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./allfeat-melodie": "./dist/allfeat-melodie/index.d.ts"
+    "./allfeat-melodie": "./dist/allfeat-melodie2/index.d.ts"
   },
   "main": "src/index.ts",
   "sideEffects": false,

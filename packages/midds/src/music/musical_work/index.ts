@@ -2,17 +2,13 @@ import { IMidds, IMiddsWithClient } from '../../interfaces/index.js'
 import { MiddsMusicalWork } from '@allfeat/chaintypes/allfeat-melodie'
 import { Iswc } from './rw_id/iswc.js'
 import { MelodieClient } from '@allfeat/client'
-import {
-  WorkCreationYear,
-  WorkParticipants,
-  WorkTitle,
-  WorkType,
-} from './types.js'
+import { WorkParticipants, WorkTitle, WorkType } from './types.js'
 import {
   MusicBpm,
   MiddsWithClient,
   MusicKey,
   MusicLanguage,
+  Year,
 } from '../../index.js'
 
 export * from './types.js'
@@ -22,7 +18,7 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
   constructor(
     public iswc: Iswc,
     public title: WorkTitle,
-    public creationYear: WorkCreationYear,
+    public creationYear: Year,
     public isInstrumental: boolean,
     public workType: WorkType,
     public participants: WorkParticipants,
