@@ -1,5 +1,11 @@
 # @allfeat/midds
 
+## 0.3.1
+
+### Patch Changes
+
+- 3964685: Add missing exports
+
 ## 0.3.0
 
 ### Minor Changes

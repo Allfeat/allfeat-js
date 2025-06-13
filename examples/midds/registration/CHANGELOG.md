@@ -1,5 +1,12 @@
 # midds-registration-example
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [3964685]
+  - @allfeat/midds@0.3.1
+
 ## 0.1.3
 
 ### Patch Changes

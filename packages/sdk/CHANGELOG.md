@@ -1,5 +1,12 @@
 # @allfeat/sdk
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies [3964685]
+  - @allfeat/midds@0.3.1
+
 ## 0.1.6
 
 ### Patch Changes
