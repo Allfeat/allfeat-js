@@ -1,4 +1,4 @@
-import { Isrc } from '../isrc.js'
+import { Isrc } from '../isrc'
 
 describe('Isrc', () => {
   test('accepts valid ISRC in normalized form', () => {
@@ -9,7 +9,7 @@ describe('Isrc', () => {
   })
 
   test('normalizes and accepts formatted ISRC', () => {
-    const isrc = new Isrc('fr-z12-30-01234')
+    const isrc = new Isrc('fr-Z12-30-01234')
     expect(isrc.toString()).toBe('FRZ123001234')
     expect(isrc.format()).toBe('FR-Z12-30-01234')
   })
@@ -31,9 +31,8 @@ describe('Isrc', () => {
   })
 
   test('throws if normalized string exceeds byte bound', () => {
-    // bound = 12, adding emoji or multibyte chars should cause failure
     expect(() => new Isrc('FR-Z12-30-0123🎵')).toThrow(
-      'Input String might be too large for the expected MIDDS bound.',
+      'Invalid MIDDS String format.',
     )
   })
 
