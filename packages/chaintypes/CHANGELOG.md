@@ -1,5 +1,11 @@
 # @allfeat/chaintypes
 
+## 0.4.0
+
+### Minor Changes
+
+- 98e81d7: Add Track MIDDS support
+
 ## 0.3.0
 
 ### Minor Changes
