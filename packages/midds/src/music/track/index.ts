@@ -19,6 +19,9 @@ import {
 import { MusicBpm, MusicKey, Year } from '../utils'
 import { UnifiedGenreEntry } from '@allfeat/music-genres'
 
+export * from './types'
+export { Isrc } from './rw_id'
+
 export class Track implements IMidds<MiddsTrack, Isrc> {
   constructor(
     public isrc: Isrc,
