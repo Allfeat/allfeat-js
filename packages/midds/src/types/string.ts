@@ -39,8 +39,8 @@ export abstract class MiddsString implements INativeTypeConverter<Bytes> {
   equals(other: MiddsString): boolean {
     return (
       this.value === other.value &&
-      this.bound === other.bound &&
-      String(this.regex) === String(other.regex)
+      this.bound() === other.bound() &&
+      String(this.regex()) === String(other.regex())
     )
   }
 

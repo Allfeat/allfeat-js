@@ -59,6 +59,17 @@ describe('MiddsString (abstract base)', () => {
     // you could expose format() in subclass and test it
   })
 
+  it('should compare instances from different classes if bounds and regex match', () => {
+    class OtherString extends MiddsString {
+      bound(): number {
+        return 10
+      }
+    }
+    const a = new TestString('hello')
+    const b = new OtherString('hello')
+    expect(a.equals(b)).toBe(true)
+  })
+
   it('should correctly compare two equal MiddsStrings', () => {
     const a = new TestString('hello')
     const b = new TestString('hello')
