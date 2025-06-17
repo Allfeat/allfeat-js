@@ -39,7 +39,7 @@ const theWeekndConnected = theWeeknd.withClient(client)
 
 // Finally, we register our MIDDS on the network.
 const unsub = await theWeekndConnected
-  .register_tx()
+  .registerTx()
   .signAndSend(aliceKeyringPair, async ({ status }) => {
     console.log('Transaction status', status.type)
     if (status.type === 'BestChainBlockIncluded') {

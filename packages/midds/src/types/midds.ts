@@ -36,7 +36,7 @@ export class MiddsWithClient<T, R> implements IMiddsWithClient<T, R> {
     return this.client
   }
 
-  register_tx(): ISubmittableExtrinsic {
+  registerTx(): ISubmittableExtrinsic {
     return this.registerFn(this.client, this.base)
   }
 

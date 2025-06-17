@@ -6,5 +6,5 @@ export interface IMiddsWithClient<T, R> extends IMidds<T, R> {
   getClient(): MelodieClient
   getMidds(): IMidds<T, R>
 
-  register_tx(): ISubmittableExtrinsic
+  registerTx(): ISubmittableExtrinsic
 }

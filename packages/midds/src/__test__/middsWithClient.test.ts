@@ -63,7 +63,7 @@ describe('MiddsWithClient', () => {
   })
 
   it('should call registerFn correctly', () => {
-    const tx = wrapped.register_tx()
+    const tx = wrapped.registerTx()
     expect(registerFn).toHaveBeenCalledWith(clientA, base)
     expect(tx).toBe(fakeExtrinsic)
   })
@@ -74,7 +74,7 @@ describe('MiddsWithClient', () => {
     expect(other.getClient()).toBe(clientB)
     expect(other.rw_id()).toBe('rw77')
     expect(other.toNativeType()).toBe('native-77')
-    expect(other.register_tx()).toBe(fakeExtrinsic)
+    expect(other.registerTx()).toBe(fakeExtrinsic)
     expect(registerFn).toHaveBeenCalledWith(clientB, base)
   })
 })
