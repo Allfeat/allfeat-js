@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "description": "Allfeat optimized RPC Client interface to connect and interact with a node.",
   "repository": {
