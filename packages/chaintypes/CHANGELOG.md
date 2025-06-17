@@ -1,5 +1,13 @@
 # @allfeat/chaintypes
 
+## 0.5.0
+
+### Minor Changes
+
+- b89e77c: Align with melodie-400
+
+  - Make some fields of Track, MusicalWork and PartyIdentifier optionnals
+
 ## 0.4.0
 
 ### Minor Changes
