@@ -13,13 +13,11 @@ export abstract class MiddsUint implements INativeTypeConverter<number> {
 
     this.value = value
     if (!this.validateMin() || !this.validateMax()) {
+      const min = this.min()
+      const max = this.max()
+      const range = `${min ?? '-∞'}..${max ?? '∞'}`
       throw new Error(
-        'MIDDS number value is not valid, must be in the range of ' +
-          this.min +
-          '' +
-          this.max +
-          ', found ' +
-          this.value,
+        `MIDDS number value is not valid, must be in the range of ${range}, found ${this.value}`,
       )
     }
   }
