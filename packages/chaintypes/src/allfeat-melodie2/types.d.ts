@@ -3896,7 +3896,7 @@ export type MiddsPartyIdentifierPerson = {
   fullName: Bytes
   aliases: Array<Bytes>
   personType: MiddsPartyIdentifierPersonType
-  genre: MiddsPartyIdentifierPersonGender
+  genre?: MiddsPartyIdentifierPersonGender | undefined
 }
 
 export type MiddsPartyIdentifierPersonType = 'Solo' | 'Group'
@@ -3927,12 +3927,12 @@ export type PalletMiddsCallLike002 =
 export type MiddsMusicalWork = {
   iswc: Bytes
   title: Bytes
-  creationYear: number
-  instrumental: boolean
+  creationYear?: number | undefined
+  instrumental?: boolean | undefined
   language?: MiddsUtilsLanguage | undefined
   bpm?: number | undefined
   key?: MiddsUtilsKey | undefined
-  workType: MiddsMusicalWorkMusicalWorkType
+  workType?: MiddsMusicalWorkMusicalWorkType | undefined
   participants: Array<MiddsMusicalWorkParticipant>
 }
 
@@ -4018,16 +4018,16 @@ export type MiddsTrack = {
   contributors: Array<bigint>
   title: Bytes
   titleAliases: Array<Bytes>
-  recordingYear: number
-  genre: AllfeatMusicGenresGeneratedGenreId
+  recordingYear?: number | undefined
+  genre?: AllfeatMusicGenresGeneratedGenreId | undefined
   genreExtras: Array<AllfeatMusicGenresGeneratedGenreId>
-  version: MiddsTrackTrackVersion
-  duration: number
-  bpm: number
-  key: MiddsUtilsKey
-  recordingPlace: Bytes
-  mixingPlace: Bytes
-  masteringPlace: Bytes
+  version?: MiddsTrackTrackVersion | undefined
+  duration?: number | undefined
+  bpm?: number | undefined
+  key?: MiddsUtilsKey | undefined
+  recordingPlace?: Bytes | undefined
+  mixingPlace?: Bytes | undefined
+  masteringPlace?: Bytes | undefined
 }
 
 export type AllfeatMusicGenresGeneratedGenreId =

@@ -18,10 +18,10 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
   constructor(
     public iswc: Iswc,
     public title: WorkTitle,
-    public creationYear: Year,
-    public isInstrumental: boolean,
-    public workType: WorkType,
     public participants: WorkParticipants,
+    public creationYear?: Year,
+    public isInstrumental?: boolean,
+    public workType?: WorkType,
     public bpm?: MusicBpm,
     public language?: MusicLanguage,
     public key?: MusicKey,
@@ -46,7 +46,7 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
       instrumental: this.isInstrumental,
       language: this.language,
       bpm: this.bpm?.toNativeType(),
-      workType: this.workType.toNativeType(),
+      workType: this.workType ? this.workType.toNativeType() : undefined,
       participants: this.participants.toNativeType(),
     }
   }

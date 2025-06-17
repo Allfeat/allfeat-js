@@ -81,7 +81,7 @@ export class Person implements INativeTypeConverter<PersonVariant> {
     public fullName: PersonFullName,
     public personType: PersonType,
     public aliases: PersonAliases,
-    public gender: PersonGender,
+    public gender?: PersonGender,
   ) {}
 
   toNativeType(): PersonVariant {
