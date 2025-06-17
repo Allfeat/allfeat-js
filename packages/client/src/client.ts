@@ -30,4 +30,15 @@ export class MelodieClient extends DedotClient<AllfeatMelodieApi> {
   static override async new(provider: AllfeatProvider): Promise<MelodieClient> {
     return this.create(provider)
   }
+
+  /**
+   * Get the free token balance of an account.
+   *
+   * @param address - Allfeat SS58 address of the account to query.
+   * @returns The account free balance as bigint.
+   */
+  async getBalanceOf(address: string): Promise<bigint> {
+    const account = await this.query.system.account(address)
+    return account.data.free
+  }
 }
