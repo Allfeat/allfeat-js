@@ -3883,8 +3883,8 @@ export type PalletMiddsCallLike =
   | { name: 'Unregister'; params: { middsId: bigint } }
 
 export type MiddsPartyIdentifier = {
-  isni: Bytes
-  ipi: bigint
+  isni?: Bytes | undefined
+  ipi?: bigint | undefined
   partyType: MiddsPartyIdentifierPartyType
 }
 

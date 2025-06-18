@@ -39,17 +39,17 @@ export const EntityType = {
 export type EntityType = (typeof EntityType)[keyof typeof EntityType]
 
 export interface realWorldIds {
-  ipi: Ipi
-  isni: Isni
+  ipi?: Ipi
+  isni?: Isni
 }
 
 export class PartyIdentifier
   implements IMidds<MiddsPartyIdentifier, realWorldIds>
 {
   constructor(
-    public ipi: Ipi,
-    public isni: Isni,
     public identity: Person | Entity,
+    public ipi?: Ipi,
+    public isni?: Isni,
   ) {}
 
   rw_id(): realWorldIds {
@@ -68,9 +68,13 @@ export class PartyIdentifier
   }
 
   toNativeType(): MiddsPartyIdentifier {
+    if (this.ipi === undefined && this.isni === undefined) {
+      throw new Error('At least the ISNI or IPI is required to be set.')
+    }
+
     return {
-      isni: this.isni.toNativeType(),
-      ipi: BigInt(this.ipi.toNativeType()),
+      isni: this.isni ? this.isni.toNativeType() : undefined,
+      ipi: this.ipi ? BigInt(this.ipi.toNativeType()) : undefined,
       partyType: this.identity.toNativeType(),
     }
   }

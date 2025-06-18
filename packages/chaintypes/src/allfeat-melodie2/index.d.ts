@@ -29,7 +29,7 @@ export interface VersionedAllfeatMelodie2Api<Rv extends RpcVersion>
 
 /**
  * @name: AllfeatMelodie2Api
- * @specVersion: 400
+ * @specVersion: 500
  **/
 export interface AllfeatMelodie2Api {
   legacy: VersionedAllfeatMelodie2Api<RpcLegacy>
