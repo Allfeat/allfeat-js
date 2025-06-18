@@ -1,5 +1,11 @@
 # @allfeat/chaintypes
 
+## 0.6.0
+
+### Minor Changes
+
+- 0a6cd65: Make the IPI/ISNI both optionnals
+
 ## 0.5.0
 
 ### Minor Changes

@@ -20,14 +20,14 @@ const aliceKeyringPair = keyring.addFromUri('//Alice')
 
 // MIDDS creation of a Party.
 const theWeeknd = new PartyIdentifier(
-  new Ipi(422823364),
-  new Isni('0000 0001 2130 5493'),
   new Person(
     new PersonFullName('The Weeknd'),
     PersonType.Solo,
     new PersonAliases([new PersonAlias('Abel Tesfaye')]),
     PersonGender.Male,
   ),
+  new Ipi(422823364),
+  new Isni('0000 0001 2130 5493'),
 )
 
 // Creating a client instance to connect to a local dev network.

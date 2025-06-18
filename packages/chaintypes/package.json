@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/chaintypes",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "description": "Types for substrate-based Allfeat chains",
   "repository": {

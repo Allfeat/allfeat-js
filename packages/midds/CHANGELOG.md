@@ -1,5 +1,15 @@
 # @allfeat/midds
 
+## 0.5.0
+
+### Minor Changes
+
+- 0a6cd65: Make the IPI/ISNI both optionnals
+
+### Patch Changes
+
+- @allfeat/client@0.2.1
+
 ## 0.4.2
 
 ### Patch Changes
