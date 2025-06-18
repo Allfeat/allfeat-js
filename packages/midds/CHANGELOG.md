@@ -1,5 +1,12 @@
 # @allfeat/midds
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [66c3f0a]
+  - @allfeat/client@0.2.1
+
 ## 0.4.1
 
 ### Patch Changes

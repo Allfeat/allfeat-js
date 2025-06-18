@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/sdk",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "High-level package which re-export others useful SDK packages.",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "type": "module",
