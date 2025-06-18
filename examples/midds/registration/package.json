@@ -3,13 +3,10 @@
   "private": true,
   "version": "0.1.6",
   "author": "Allfeat labs. <hello@allfeat.com>",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "build:clean": "rm -rf ./dist",
-    "start": "tsc && node ./dist/index.js",
+    "start": "tsx ",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit"
   },
@@ -19,6 +16,7 @@
     "@allfeat/eslint-config": "workspace:*",
     "@allfeat/typescript-config": "workspace:*",
     "eslint": "^9.27.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {

@@ -23,8 +23,9 @@ export class MelodieClient extends DedotClient<AllfeatMelodieApi> {
   static override async create(
     provider: AllfeatProvider,
   ): Promise<MelodieClient> {
-    const client = await DedotClient.new<AllfeatMelodieApi>(provider)
-    return client as MelodieClient
+    const client = new MelodieClient(provider)
+    await client.connect()
+    return client
   }
 
   static override async new(provider: AllfeatProvider): Promise<MelodieClient> {
