@@ -1,5 +1,14 @@
 # @allfeat/sdk
 
+## 0.1.12
+
+### Patch Changes
+
+- Updated dependencies [9b9853a]
+  - @allfeat/chaintypes@0.6.1
+  - @allfeat/midds@0.5.1
+  - @allfeat/client@0.2.1
+
 ## 0.1.11
 
 ### Patch Changes

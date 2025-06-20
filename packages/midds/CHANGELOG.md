@@ -1,5 +1,12 @@
 # @allfeat/midds
 
+## 0.5.1
+
+### Patch Changes
+
+- 9b9853a: Fix EntityName incorrect bound
+  - @allfeat/client@0.2.1
+
 ## 0.5.0
 
 ### Minor Changes

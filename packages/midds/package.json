@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/midds",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "repository": {
@@ -33,7 +33,7 @@
     "@allfeat/chaintypes": "workspace:*",
     "@allfeat/eslint-config": "workspace:*",
     "@allfeat/jest-config": "workspace:*",
-    "@allfeat/music-genres": "^1.0.1",
+    "@allfeat/music-genres": "^1.0.2",
     "@allfeat/typescript-config": "workspace:*",
     "@types/jest": "^29.5.14",
     "eslint": "^9.28.0",

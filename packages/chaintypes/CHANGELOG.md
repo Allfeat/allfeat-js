@@ -1,5 +1,11 @@
 # @allfeat/chaintypes
 
+## 0.6.1
+
+### Patch Changes
+
+- 9b9853a: Fix EntityName incorrect bound
+
 ## 0.6.0
 
 ### Minor Changes
