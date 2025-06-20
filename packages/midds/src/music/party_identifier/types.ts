@@ -4,7 +4,7 @@ import { MiddsArrayConvertible } from '../../types/array.js'
 
 export class EntityName extends MiddsString {
   bound(): number {
-    return 256
+    return 128
   }
 }
 
