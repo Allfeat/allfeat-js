@@ -1,5 +1,11 @@
 # @allfeat/client
 
+## 0.2.2
+
+### Patch Changes
+
+- f15d3b2: Update dedot to 0.13.2
+
 ## 0.2.1
 
 ### Patch Changes

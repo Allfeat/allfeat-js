@@ -1,5 +1,13 @@
 # @allfeat/midds
 
+## 0.5.2
+
+### Patch Changes
+
+- f15d3b2: Update dedot to 0.13.2
+- Updated dependencies [f15d3b2]
+  - @allfeat/client@0.2.2
+
 ## 0.5.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @allfeat/sdk
 
+## 0.1.13
+
+### Patch Changes
+
+- Updated dependencies [f15d3b2]
+  - @allfeat/client@0.2.2
+  - @allfeat/midds@0.5.2
+
 ## 0.1.12
 
 ### Patch Changes
