@@ -28,7 +28,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "dedot": ">=0.9.6"
+    "dedot": "^0.13.2"
   },
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {

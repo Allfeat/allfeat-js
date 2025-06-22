@@ -41,7 +41,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "dedot": ">=0.9.6"
+    "dedot": "^0.13.2"
   },
   "packageManager": "pnpm@10.10.0"
 }

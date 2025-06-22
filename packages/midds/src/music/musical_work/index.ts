@@ -26,6 +26,7 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
     public language?: MusicLanguage,
     public key?: MusicKey,
   ) {}
+
   rw_id(): Iswc {
     return this.iswc
   }
