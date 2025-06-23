@@ -21,6 +21,7 @@ describe('MelodieClient.new', () => {
 
     expect(client).toBeInstanceOf(MelodieClient)
     expect(typeof client.getBalanceOf).toBe('function')
+    expect(typeof client.metrics.countActiveWallets).toBe('function')
   })
 })
 

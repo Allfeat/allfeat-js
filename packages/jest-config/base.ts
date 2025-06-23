@@ -8,6 +8,9 @@ const config = {
   transformIgnorePatterns: ['node_modules/*', 'packages/turbo-workspaces/*'],
   modulePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/dist'],
   collectCoverage: true,
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 } as const satisfies Config
 
 export default config

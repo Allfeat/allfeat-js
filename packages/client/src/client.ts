@@ -1,5 +1,6 @@
 import { DedotClient } from 'dedot'
-import { AllfeatProvider } from './index.js'
+import { AllfeatProvider } from './provider.js'
+import { Metrics } from './metrics.js'
 import { AllfeatMelodieApi } from '@allfeat/chaintypes'
 
 /**
@@ -16,8 +17,12 @@ import { AllfeatMelodieApi } from '@allfeat/chaintypes'
  * ```
  */
 export class MelodieClient extends DedotClient<AllfeatMelodieApi> {
+  /** Helper metrics utilities */
+  readonly metrics: Metrics
+
   private constructor(provider: AllfeatProvider) {
     super(provider)
+    this.metrics = new Metrics(this)
   }
 
   static override async create(
