@@ -16,4 +16,33 @@ export class Metrics {
       0,
     )
   }
+
+  async CountPartyIdentifiers(): Promise<bigint> {
+    const nextId = await this.client.query.partyIdentifiers.nextId()
+    return nextId - BigInt(1)
+  }
+
+  async CountMusicalWorks(): Promise<bigint> {
+    const nextId = await this.client.query.musicalWorks.nextId()
+    return nextId - BigInt(1)
+  }
+
+  async CountTracks(): Promise<bigint> {
+    const nextId = await this.client.query.tracks.nextId()
+    return nextId - BigInt(1)
+  }
+
+  async CountReleases(): Promise<bigint> {
+    const nextId = await this.client.query.releases.nextId()
+    return nextId - BigInt(1)
+  }
+
+  async CountTotalCreatedMidds(): Promise<bigint> {
+    return (
+      (await this.CountPartyIdentifiers()) +
+      (await this.CountMusicalWorks()) +
+      (await this.CountTracks()) +
+      (await this.CountReleases())
+    )
+  }
 }

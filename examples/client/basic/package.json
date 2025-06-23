@@ -1,0 +1,28 @@
+{
+  "name": "client-metrics-example",
+  "private": true,
+  "version": "0.1.0",
+  "author": "Allfeat labs. <hello@allfeat.com>",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "devDependencies": {
+    "@allfeat/eslint-config": "workspace:*",
+    "@allfeat/typescript-config": "workspace:*",
+    "eslint": "^9.29.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@allfeat/client": "workspace:*",
+    "@polkadot/keyring": "^13.5.2",
+    "@polkadot/util-crypto": "^13.5.2"
+  },
+  "packageManager": "pnpm@10.10.0"
+}

@@ -17,7 +17,6 @@
 ### Minor Changes
 
 - b89e77c: Align with melodie-400
-
   - Make some fields of Track, MusicalWork and PartyIdentifier optionnals
 
 ## 0.4.0
