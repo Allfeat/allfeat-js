@@ -1,6 +1,6 @@
 {
   "name": "@allfeat/sdk",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "High-level package which re-export others useful SDK packages.",
   "author": "Allfeat labs. <hello@allfeat.com>",
   "type": "module",
@@ -25,7 +25,8 @@
   "dependencies": {
     "@allfeat/chaintypes": "workspace:*",
     "@allfeat/client": "workspace:*",
-    "@allfeat/midds": "workspace:*"
+    "@allfeat/midds": "workspace:*",
+    "@allfeat/music-genres": "^1.0.3"
   },
   "packageManager": "pnpm@10.10.0",
   "publishConfig": {

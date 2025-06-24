@@ -1,5 +1,13 @@
 # @allfeat/sdk
 
+## 0.1.14
+
+### Patch Changes
+
+- 8f2f67e: bump @allfeat/music-genres version
+- Updated dependencies [8f2f67e]
+  - @allfeat/midds@0.5.3
+
 ## 0.1.13
 
 ### Patch Changes

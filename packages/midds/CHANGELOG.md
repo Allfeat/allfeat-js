@@ -1,5 +1,11 @@
 # @allfeat/midds
 
+## 0.5.3
+
+### Patch Changes
+
+- 8f2f67e: bump @allfeat/music-genres version
+
 ## 0.5.2
 
 ### Patch Changes
