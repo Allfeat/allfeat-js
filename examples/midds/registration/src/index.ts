@@ -9,7 +9,23 @@ import {
   PersonType,
   PersonGender,
   PersonAlias,
+  Track,
+  Isrc,
+  Producers,
+  Performers,
+  Contributors,
+  Title,
+  TitleAliases,
+  ExtraGenres,
+  asYear,
+  TrackVersion,
+  TrackDuration,
+  MusicBpm,
+  TrackRecordingPlace,
+  TrackMasteringPlace,
+  TrackMixingPlace,
 } from '@allfeat/midds'
+import { allGenresUnified } from '@allfeat/music-genres'
 import { Keyring } from '@polkadot/keyring'
 import { cryptoWaitReady } from '@polkadot/util-crypto'
 
@@ -30,15 +46,45 @@ const theWeeknd = new PartyIdentifier(
   new Isni('0000 0001 2130 5493'),
 )
 
+const synthpop = allGenresUnified.find((g) => g.id === 'synthpop')
+if (!synthpop) {
+  throw new Error('Genre Synthpop not found in genre list')
+}
+
+// MIDDS Creation of a Track
+const blindingLights = new Track(
+  new Isrc('USUG11904245'),
+  0n,
+  0n,
+  new Producers([]),
+  new Performers([]),
+  new Contributors([]),
+  new Title('Blinding Lights'),
+  new TitleAliases([]),
+  new ExtraGenres([]),
+  synthpop,
+  asYear(2019),
+  TrackVersion.Original,
+  new TrackDuration(200),
+  new MusicBpm(171),
+  'F',
+  new TrackRecordingPlace('Los Angeles, CA'),
+  new TrackMasteringPlace('New York, NY'),
+  new TrackMixingPlace('Toronto, Canada'),
+)
+
 // Creating a client instance to connect to a local dev network.
 const provider = new AllfeatProvider('local')
 const client = await MelodieClient.create(provider)
 
+// FIXME: fix multiple transaction not being possible
+
 // We can now attach our client to our MIDDS to make available new network operations to our MIDDS object.
 const theWeekndConnected = theWeeknd.withClient(client)
+const blidingLightsConnected = blindingLights.withClient(client)
 
 // Finally, we register our MIDDS on the network.
-const unsub = await theWeekndConnected
+const unsubParty = await theWeekndConnected
   .registerTx()
   .signAndSend(aliceKeyringPair, async ({ status }) => {
     console.log('Transaction status', status.type)
@@ -47,6 +93,20 @@ const unsub = await theWeekndConnected
       console.log(
         `Transaction completed at block hash ${status.value.blockHash}`,
       )
-      await unsub()
+      await unsubParty()
+    }
+  })
+
+// Finally, we register our MIDDS on the network.
+const unsubTrack = await blidingLightsConnected
+  .registerTx()
+  .signAndSend(aliceKeyringPair, async ({ status }) => {
+    console.log('Transaction status', status.type)
+    if (status.type === 'BestChainBlockIncluded') {
+      // or status.type === 'Finalized'
+      console.log(
+        `Transaction completed at block hash ${status.value.blockHash}`,
+      )
+      await unsubTrack()
     }
   })
