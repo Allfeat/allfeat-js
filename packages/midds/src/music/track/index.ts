@@ -5,19 +5,18 @@ import { MelodieClient } from '@allfeat/client'
 import { MiddsId, MiddsWithClient } from '../../types'
 import {
   Contributors,
-  ExtraGenres,
   Performers,
   Producers,
   Title,
   TitleAliases,
   TrackDuration,
+  TrackGenres,
   TrackMasteringPlace,
   TrackMixingPlace,
   TrackRecordingPlace,
   TrackVersion,
 } from './types'
 import { MusicBpm, MusicKey, Year } from '../utils'
-import { UnifiedGenreEntry } from '@allfeat/music-genres'
 
 export * from './types'
 export { Isrc } from './rw_id'
@@ -32,8 +31,7 @@ export class Track implements IMidds<MiddsTrack, Isrc> {
     public contributors: Contributors,
     public title: Title,
     public title_aliases: TitleAliases,
-    public genre_extras: ExtraGenres,
-    public genre?: UnifiedGenreEntry,
+    public genres: TrackGenres,
     public recording_year?: Year,
     public version?: TrackVersion,
     public duration?: TrackDuration,
@@ -59,8 +57,7 @@ export class Track implements IMidds<MiddsTrack, Isrc> {
       title: this.title.toNativeType(),
       titleAliases: this.title_aliases.toNativeType(),
       recordingYear: this.recording_year,
-      genre: this.genre ? this.genre.toNativeType() : undefined,
-      genreExtras: this.genre_extras.toNativeType(),
+      genres: this.genres.toNativeType(),
       version: this.version,
       duration: this.duration ? this.duration.toNativeType() : undefined,
       bpm: this.bpm ? this.bpm.toNativeType() : undefined,

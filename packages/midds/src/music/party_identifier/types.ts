@@ -8,20 +8,20 @@ export class EntityName extends MiddsString {
   }
 }
 
-export class PersonFullName extends MiddsString {
+export class ArtistFullName extends MiddsString {
   bound(): number {
     return 256
   }
 }
 
-export class PersonAlias extends MiddsString {
+export class ArtistAlias extends MiddsString {
   bound(): number {
     return 128
   }
 }
 
-export class PersonAliases extends MiddsArrayConvertible<
-  PersonAlias,
+export class ArtistAliases extends MiddsArrayConvertible<
+  ArtistAlias,
   HexString
 > {
   bound(): number {

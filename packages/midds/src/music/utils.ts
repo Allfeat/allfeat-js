@@ -26,24 +26,52 @@ export const MUSIC_LANGUAGES = [
   'Latin',
   'Esperanto',
 ] as const
-
 export type MusicLanguage = (typeof MUSIC_LANGUAGES)[number]
 
 export const MUSIC_KEYS = [
-  'C',
-  'Cs',
-  'D',
-  'Ds',
-  'E',
-  'F',
-  'Fs',
-  'G',
-  'Gs',
   'A',
+  'Am',
   'As',
+  'Asm',
+  'Ab',
+  'Abm',
   'B',
+  'Bm',
+  'Bs',
+  'Bsm',
+  'Bb',
+  'Bbm',
+  'C',
+  'Cm',
+  'Cs',
+  'Csm',
+  'Cb',
+  'Cbm',
+  'D',
+  'Dm',
+  'Ds',
+  'Dsm',
+  'Db',
+  'Dbm',
+  'E',
+  'Em',
+  'Es',
+  'Esm',
+  'Eb',
+  'Ebm',
+  'F',
+  'Fm',
+  'Fs',
+  'Fsm',
+  'Fb',
+  'Fbm',
+  'G',
+  'Gm',
+  'Gs',
+  'Gsm',
+  'Gb',
+  'Gbm',
 ] as const
-
 export type MusicKey = (typeof MUSIC_KEYS)[number]
 
 export const MUSIC_MODES = [
@@ -56,7 +84,6 @@ export const MUSIC_MODES = [
   'Aeolian',
   'Locrian',
 ] as const
-
 export type MusicMode = (typeof MUSIC_MODES)[number]
 
 /**

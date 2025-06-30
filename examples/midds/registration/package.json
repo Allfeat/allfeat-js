@@ -15,7 +15,7 @@
   "devDependencies": {
     "@allfeat/eslint-config": "workspace:*",
     "@allfeat/typescript-config": "workspace:*",
-    "eslint": "^9.27.0",
+    "eslint": "^9.30.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
@@ -23,8 +23,8 @@
     "@allfeat/client": "workspace:*",
     "@allfeat/midds": "workspace:*",
     "@allfeat/music-genres": "^1.0.3",
-    "@polkadot/keyring": "^13.5.1",
-    "@polkadot/util-crypto": "^13.5.1"
+    "@polkadot/keyring": "^13.5.2",
+    "@polkadot/util-crypto": "^13.5.2"
   },
   "packageManager": "pnpm@10.10.0"
 }

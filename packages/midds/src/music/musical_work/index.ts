@@ -2,7 +2,12 @@ import { IMidds, IMiddsWithClient } from '../../interfaces/index.js'
 import { MiddsMusicalWork } from '@allfeat/chaintypes/allfeat-melodie'
 import { Iswc } from './rw_id/iswc.js'
 import { MelodieClient } from '@allfeat/client'
-import { WorkParticipants, WorkTitle, WorkType } from './types.js'
+import {
+  WorkClassicalInfo,
+  WorkParticipants,
+  WorkTitle,
+  WorkType,
+} from './types.js'
 import {
   MusicBpm,
   MiddsWithClient,
@@ -25,6 +30,7 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
     public bpm?: MusicBpm,
     public language?: MusicLanguage,
     public key?: MusicKey,
+    public classical_info?: WorkClassicalInfo,
   ) {}
 
   rw_id(): Iswc {
@@ -46,9 +52,13 @@ export class MusicalWork implements IMidds<MiddsMusicalWork, Iswc> {
       creationYear: this.creationYear,
       instrumental: this.isInstrumental,
       language: this.language,
+      key: this.key,
       bpm: this.bpm?.toNativeType(),
       workType: this.workType ? this.workType.toNativeType() : undefined,
       participants: this.participants.toNativeType(),
+      classicalInfo: this.classical_info
+        ? this.classical_info.toNativeType()
+        : undefined,
     }
   }
 }

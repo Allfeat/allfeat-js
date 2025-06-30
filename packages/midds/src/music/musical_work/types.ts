@@ -1,4 +1,5 @@
 import {
+  MiddsMusicalWorkClassicalInfo,
   MiddsMusicalWorkMusicalWorkType,
   MiddsMusicalWorkParticipant,
 } from '@allfeat/chaintypes/allfeat-melodie'
@@ -45,20 +46,12 @@ export class MashupWork
 export class AdaptationWork
   implements INativeTypeConverter<MiddsMusicalWorkMusicalWorkType>
 {
-  constructor(
-    public references: WorkReferences,
-    public isLyricsAdaptation: boolean,
-    public isSongAdaptation: boolean,
-  ) {}
+  constructor(public reference: MiddsId) {}
 
   toNativeType(): MiddsMusicalWorkMusicalWorkType {
     return {
       type: 'Adaptation',
-      value: {
-        references: this.references.toNativeType(),
-        lyricsAdaptation: this.isLyricsAdaptation,
-        songAdaptation: this.isSongAdaptation,
-      },
+      value: this.reference,
     }
   }
 }
@@ -74,7 +67,7 @@ export const WorkParticipantRole = {
   Composer: 'Composer',
   Arranger: 'Arranger',
   Adapter: 'Adapter',
-  Editor: 'Editor',
+  Publisher: 'Publisher',
 } as const
 export type WorkParticipantRole =
   (typeof WorkParticipantRole)[keyof typeof WorkParticipantRole]
@@ -101,5 +94,37 @@ export class WorkParticipants extends MiddsArrayConvertible<
 > {
   bound(): number {
     return 512
+  }
+}
+
+export class WorkOpus extends MiddsString {
+  bound(): number {
+    return 128
+  }
+}
+
+export class WorkCatalogNumber extends MiddsString {
+  bound(): number {
+    return 128
+  }
+}
+
+export class WorkClassicalInfo
+  implements INativeTypeConverter<MiddsMusicalWorkClassicalInfo>
+{
+  constructor(
+    public opus?: WorkOpus,
+    public catalog_number?: WorkCatalogNumber,
+    public number_of_voices?: number,
+  ) {}
+
+  toNativeType(): MiddsMusicalWorkClassicalInfo {
+    return {
+      opus: this.opus ? this.opus.toNativeType() : undefined,
+      catalogNumber: this.catalog_number
+        ? this.catalog_number.toNativeType()
+        : undefined,
+      numberOfVoices: this.number_of_voices,
+    }
   }
 }

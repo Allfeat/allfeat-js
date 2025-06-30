@@ -34,7 +34,7 @@ export class TitleAliases extends MiddsArrayConvertible<Title, HexString> {
   }
 }
 
-export class ExtraGenres extends MiddsArrayConvertible<
+export class TrackGenres extends MiddsArrayConvertible<
   UnifiedGenreEntry,
   AllfeatMusicGenresGeneratedGenreId
 > {

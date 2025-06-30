@@ -3889,29 +3889,31 @@ export type MiddsPartyIdentifier = {
 }
 
 export type MiddsPartyIdentifierPartyType =
-  | { type: 'Person'; value: MiddsPartyIdentifierPerson }
+  | { type: 'Artist'; value: MiddsPartyIdentifierArtist }
   | { type: 'Entity'; value: MiddsPartyIdentifierEntity }
 
-export type MiddsPartyIdentifierPerson = {
+export type MiddsPartyIdentifierArtist = {
   fullName: Bytes
   aliases: Array<Bytes>
-  personType: MiddsPartyIdentifierPersonType
-  genre?: MiddsPartyIdentifierPersonGender | undefined
+  artistType: MiddsPartyIdentifierArtistType
+  genre?: MiddsPartyIdentifierArtistGender | undefined
 }
 
-export type MiddsPartyIdentifierPersonType = 'Solo' | 'Group'
+export type MiddsPartyIdentifierArtistType =
+  | 'Person'
+  | 'Group'
+  | 'Orchestra'
+  | 'Choir'
+  | 'Other'
 
-export type MiddsPartyIdentifierPersonGender = 'Male' | 'Female' | 'Neither'
+export type MiddsPartyIdentifierArtistGender = 'Male' | 'Female' | 'Neither'
 
 export type MiddsPartyIdentifierEntity = {
   name: Bytes
   entityType: MiddsPartyIdentifierEntityType
 }
 
-export type MiddsPartyIdentifierEntityType =
-  | 'Publisher'
-  | 'Producer'
-  | 'DistribAggr'
+export type MiddsPartyIdentifierEntityType = 'Publisher' | 'Producer'
 
 /**
  * Contains a variant per dispatchable extrinsic that this pallet has.
@@ -3934,6 +3936,7 @@ export type MiddsMusicalWork = {
   key?: MiddsUtilsKey | undefined
   workType?: MiddsMusicalWorkMusicalWorkType | undefined
   participants: Array<MiddsMusicalWorkParticipant>
+  classicalInfo?: MiddsMusicalWorkClassicalInfo | undefined
 }
 
 export type MiddsUtilsLanguage =
@@ -3961,30 +3964,54 @@ export type MiddsUtilsLanguage =
   | 'Esperanto'
 
 export type MiddsUtilsKey =
-  | 'C'
-  | 'Cs'
-  | 'D'
-  | 'Ds'
-  | 'E'
-  | 'F'
-  | 'Fs'
-  | 'G'
-  | 'Gs'
   | 'A'
+  | 'Am'
   | 'As'
+  | 'Asm'
+  | 'Ab'
+  | 'Abm'
   | 'B'
+  | 'Bm'
+  | 'Bs'
+  | 'Bsm'
+  | 'Bb'
+  | 'Bbm'
+  | 'C'
+  | 'Cm'
+  | 'Cs'
+  | 'Csm'
+  | 'Cb'
+  | 'Cbm'
+  | 'D'
+  | 'Dm'
+  | 'Ds'
+  | 'Dsm'
+  | 'Db'
+  | 'Dbm'
+  | 'E'
+  | 'Em'
+  | 'Es'
+  | 'Esm'
+  | 'Eb'
+  | 'Ebm'
+  | 'F'
+  | 'Fm'
+  | 'Fs'
+  | 'Fsm'
+  | 'Fb'
+  | 'Fbm'
+  | 'G'
+  | 'Gm'
+  | 'Gs'
+  | 'Gsm'
+  | 'Gb'
+  | 'Gbm'
 
 export type MiddsMusicalWorkMusicalWorkType =
   | { type: 'Original' }
   | { type: 'Medley'; value: Array<bigint> }
   | { type: 'Mashup'; value: Array<bigint> }
-  | { type: 'Adaptation'; value: MiddsMusicalWorkAdapationWork }
-
-export type MiddsMusicalWorkAdapationWork = {
-  references: Array<bigint>
-  lyricsAdaptation: boolean
-  songAdaptation: boolean
-}
+  | { type: 'Adaptation'; value: bigint }
 
 export type MiddsMusicalWorkParticipant = {
   id: bigint
@@ -3996,7 +4023,13 @@ export type MiddsMusicalWorkParticipantRole =
   | 'Composer'
   | 'Arranger'
   | 'Adapter'
-  | 'Editor'
+  | 'Publisher'
+
+export type MiddsMusicalWorkClassicalInfo = {
+  opus?: Bytes | undefined
+  catalogNumber?: Bytes | undefined
+  numberOfVoices?: number | undefined
+}
 
 /**
  * Contains a variant per dispatchable extrinsic that this pallet has.
@@ -4019,8 +4052,7 @@ export type MiddsTrack = {
   title: Bytes
   titleAliases: Array<Bytes>
   recordingYear?: number | undefined
-  genre?: AllfeatMusicGenresGeneratedGenreId | undefined
-  genreExtras: Array<AllfeatMusicGenresGeneratedGenreId>
+  genres: Array<AllfeatMusicGenresGeneratedGenreId>
   version?: MiddsTrackTrackVersion | undefined
   duration?: number | undefined
   bpm?: number | undefined

@@ -1,13 +1,13 @@
 export { Isni, Ipi } from './rw_id/index.js'
-export { PersonAliases, PersonAlias, PersonFullName } from './types.js'
+export { ArtistAlias, ArtistAliases, ArtistFullName } from './types.js'
 
 import {
   MiddsPartyIdentifier,
   MiddsPartyIdentifierEntity,
-  MiddsPartyIdentifierPerson,
+  MiddsPartyIdentifierArtist,
 } from '@allfeat/chaintypes/allfeat-melodie'
 import { Isni, Ipi } from './rw_id'
-import { EntityName, PersonAliases, PersonFullName } from './types'
+import { ArtistAliases, ArtistFullName, EntityName } from './types'
 import {
   IMidds,
   IMiddsWithClient,
@@ -18,23 +18,22 @@ import { MiddsWithClient } from '../../types/index.js'
 
 export * from './types.js'
 
-export const PersonType = {
-  Solo: 'Solo',
+export const ArtistType = {
+  Solo: 'Person',
   Group: 'Group',
 } as const
-export type PersonType = (typeof PersonType)[keyof typeof PersonType]
+export type ArtistType = (typeof ArtistType)[keyof typeof ArtistType]
 
-export const PersonGender = {
+export const ArtistGender = {
   Male: 'Male',
   Female: 'Female',
   Neither: 'Neither',
 } as const
-export type PersonGender = (typeof PersonGender)[keyof typeof PersonGender]
+export type ArtistGender = (typeof ArtistGender)[keyof typeof ArtistGender]
 
 export const EntityType = {
   Publisher: 'Publisher',
   Producer: 'Producer',
-  DistribAggr: 'DistribAggr',
 } as const
 export type EntityType = (typeof EntityType)[keyof typeof EntityType]
 
@@ -47,7 +46,7 @@ export class PartyIdentifier
   implements IMidds<MiddsPartyIdentifier, realWorldIds>
 {
   constructor(
-    public identity: Person | Entity,
+    public identity: Artist | Entity,
     public ipi?: Ipi,
     public isni?: Isni,
   ) {}
@@ -80,20 +79,20 @@ export class PartyIdentifier
   }
 }
 
-export class Person implements INativeTypeConverter<PersonVariant> {
+export class Artist implements INativeTypeConverter<ArtistVariant> {
   constructor(
-    public fullName: PersonFullName,
-    public personType: PersonType,
-    public aliases: PersonAliases,
-    public gender?: PersonGender,
+    public fullName: ArtistFullName,
+    public artistType: ArtistType,
+    public aliases: ArtistAliases,
+    public gender?: ArtistGender,
   ) {}
 
-  toNativeType(): PersonVariant {
+  toNativeType(): ArtistVariant {
     return {
-      type: 'Person',
+      type: 'Artist',
       value: {
         fullName: this.fullName.toNativeType(),
-        personType: this.personType,
+        artistType: this.artistType,
         aliases: this.aliases.toNativeType(),
         genre: this.gender,
       },
@@ -121,7 +120,7 @@ export interface EntityVariant {
   type: 'Entity'
   value: MiddsPartyIdentifierEntity
 }
-export interface PersonVariant {
-  type: 'Person'
-  value: MiddsPartyIdentifierPerson
+export interface ArtistVariant {
+  type: 'Artist'
+  value: MiddsPartyIdentifierArtist
 }

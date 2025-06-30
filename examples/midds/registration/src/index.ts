@@ -3,12 +3,6 @@ import {
   PartyIdentifier,
   Ipi,
   Isni,
-  Person,
-  PersonFullName,
-  PersonAliases,
-  PersonType,
-  PersonGender,
-  PersonAlias,
   Track,
   Isrc,
   Producers,
@@ -16,7 +10,6 @@ import {
   Contributors,
   Title,
   TitleAliases,
-  ExtraGenres,
   asYear,
   TrackVersion,
   TrackDuration,
@@ -24,6 +17,13 @@ import {
   TrackRecordingPlace,
   TrackMasteringPlace,
   TrackMixingPlace,
+  Artist,
+  ArtistFullName,
+  ArtistType,
+  ArtistAlias,
+  ArtistAliases,
+  ArtistGender,
+  TrackGenres,
 } from '@allfeat/midds'
 import { allGenresUnified } from '@allfeat/music-genres'
 import { Keyring } from '@polkadot/keyring'
@@ -36,11 +36,11 @@ const aliceKeyringPair = keyring.addFromUri('//Alice')
 
 // MIDDS creation of a Party.
 const theWeeknd = new PartyIdentifier(
-  new Person(
-    new PersonFullName('The Weeknd'),
-    PersonType.Solo,
-    new PersonAliases([new PersonAlias('Abel Tesfaye')]),
-    PersonGender.Male,
+  new Artist(
+    new ArtistFullName('The Weeknd'),
+    ArtistType.Solo,
+    new ArtistAliases([new ArtistAlias('Abel Tesfaye')]),
+    ArtistGender.Male,
   ),
   new Ipi(422823364),
   new Isni('0000 0001 2130 5493'),
@@ -61,8 +61,7 @@ const blindingLights = new Track(
   new Contributors([]),
   new Title('Blinding Lights'),
   new TitleAliases([]),
-  new ExtraGenres([]),
-  synthpop,
+  new TrackGenres([synthpop]),
   asYear(2019),
   TrackVersion.Original,
   new TrackDuration(200),
