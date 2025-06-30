@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "tsx ",
+    "register-artist": "tsx src/artist.ts",
+    "register-track": "tsx src/track.ts",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit"
   },
