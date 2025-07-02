@@ -1,5 +1,18 @@
 # @allfeat/sdk
 
+## 0.2.0
+
+### Minor Changes
+
+- 10886be: Update track version enum to adapt to melodie-600 changes
+
+### Patch Changes
+
+- Updated dependencies [10886be]
+  - @allfeat/chaintypes@0.8.0
+  - @allfeat/midds@0.7.0
+  - @allfeat/client@0.2.2
+
 ## 0.1.15
 
 ### Patch Changes

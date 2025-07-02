@@ -1,5 +1,11 @@
 # @allfeat/chaintypes
 
+## 0.8.0
+
+### Minor Changes
+
+- 10886be: Update track version enum to adapt to melodie-600 changes
+
 ## 0.7.0
 
 ### Minor Changes

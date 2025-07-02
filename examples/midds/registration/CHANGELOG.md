@@ -1,5 +1,13 @@
 # midds-registration-example
 
+## 0.1.13
+
+### Patch Changes
+
+- Updated dependencies [10886be]
+  - @allfeat/midds@0.7.0
+  - @allfeat/client@0.2.2
+
 ## 0.1.12
 
 ### Patch Changes
