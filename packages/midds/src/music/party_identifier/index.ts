@@ -19,8 +19,11 @@ import { MiddsWithClient } from '../../types/index.js'
 export * from './types.js'
 
 export const ArtistType = {
-  Solo: 'Person',
+  Person: 'Person',
   Group: 'Group',
+  Orchestra: 'Orchestra',
+  Choir: 'Choir',
+  Other: 'Other',
 } as const
 export type ArtistType = (typeof ArtistType)[keyof typeof ArtistType]
 

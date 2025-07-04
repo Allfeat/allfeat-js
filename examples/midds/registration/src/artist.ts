@@ -22,7 +22,7 @@ const aliceKeyringPair = keyring.addFromUri('//Alice')
 const theWeeknd = new PartyIdentifier(
   new Artist(
     new ArtistFullName('The Weeknd'),
-    ArtistType.Solo,
+    ArtistType.Person,
     new ArtistAliases([new ArtistAlias('Abel Tesfaye')]),
     ArtistGender.Male,
   ),
